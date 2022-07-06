@@ -1,0 +1,12 @@
+.body {
+  height: 100vh;
+  padding-top: $topnav-height;
+  background:
+    linear-gradient(
+      rgba(#3F4E4F, 0.6),
+      rgba(#3F4E4F, 0.6)
+    ),
+    url('/images/concert.jpg') center top;
+  
+  background-size: cover;
+}
