@@ -2,6 +2,8 @@
 @import '../utilities';
 
 .dark {
+  // margin-left: $sidenav-width;
+  // position: relative;
   @import '../dark-theme';
   @import './core';
 }

@@ -6,7 +6,7 @@ const LIGHT = 'light';
 
 export default function MVPlaylist() {
   const [ theme, setTheme ] = useState(DARK);
-  
+
   return (
     <div className={styles[theme]}>
     <div className={styles['mvplaylist']}>
