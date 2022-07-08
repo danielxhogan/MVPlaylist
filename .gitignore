@@ -3,6 +3,7 @@
 /pages/testing-ground
 /styles/sass/testing-ground/
 /styles/css/testing-ground/
+/styles/css/PlaylistWidgetMobile.module.css
 
 # dependencies
 /node_modules
