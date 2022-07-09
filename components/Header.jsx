@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import styles from '../styles/css/Header.module.css';
 
@@ -13,7 +14,62 @@ export default function Header({ home=false }) {
   const [ sunClass, setSunClass ] = useState(SHOWN);
   const [ moonClass, setMoonClass ] = useState(HIDDEN);
   const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
+  
+  const { data: session, status } = useSession();
 
+  if (status === "authenticated") {
+
+    if (session.accessToken) {
+      console.log(`accessToken: ${session.accessToken}`);
+    }
+
+    if (session.refreshToken) {
+      console.log(`refreshToken: ${session.refreshToken}`);
+    }
+
+    if (session.user) {
+      console.log(`user: ${session.user}`);
+
+      if (session.user.name) {
+        console.log(`name: ${session.user.name}`);
+      }
+  
+      if (session.user.id) {
+        console.log(`id: ${session.user.id}`);
+      }
+  
+      if (session.user.email) {
+        console.log(`email: ${session.user.email}`);
+      }
+    }
+
+
+    if (session.token) {
+      console.log(`token: ${session.token}`);
+
+      if (session.token.accessToken) {
+        console.log(`token.accessToken: ${session.token.accessToken}`);
+      }
+  
+      if (session.token.refreshToken) {
+        console.log(`token.refreshToken: ${session.token.refreshToken}`);
+      }
+
+      if (session.token.user) {
+        console.log(`session.token.user: ${session.token.user}`)
+        if (session.token.user.name) {
+          console.log(`session.token.user.name: ${session.token.user.name}`)
+          console.log(`session.token.user.email: ${session.token.user.email}`)
+          console.log(`session.token.user.id: ${session.token.user.id}`)
+          console.log(`session.token.user.image: ${session.token.user.image}`)          
+        } 
+      }
+    }
+
+  } else {
+    console.log('not logged in');
+  }
+  
   const onClickMagGlass = () => {
     switch (smScrSearchClass) {
       case HIDDEN: setSmScrSearchClass(SHOWN); break;
@@ -102,8 +158,11 @@ export default function Header({ home=false }) {
           />
         </div>
 
-        <button>
+        <button onClick={() => signIn('spotify')}>
           Login to Spotify
+        </button>
+        <button onClick={() => signOut()}>
+          Sign Out
         </button>
 
       </div>
