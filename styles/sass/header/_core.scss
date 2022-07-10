@@ -1,8 +1,8 @@
-.home {
+.home.topnav {
   background: transparent;
 }
 
-.not-home {
+.not-home.topnav {
   background: $topnav-color;
 }
 
@@ -42,7 +42,11 @@
     }
   }
 
-  .search-bar {
+  .home.search-bar {
+    display: none;
+  }
+
+  .not-home.search-bar {
     transition: $tran-05;
 
     .magnifying-glass {
@@ -65,7 +69,7 @@
   }
 
   @media only screen and (max-width: $sm-screen-size) {
-    .search-bar {
+    .not-home.search-bar {
       .magnifying-glass {
         visibility: visible;
         width: auto;
@@ -134,12 +138,19 @@
   }
 }
 
-.small-scr-search-bar {
+.home.small-scr-search-bar {
+  display: none;
+}
+
+.not-home.small-scr-search-bar {
   position: absolute;
+  top: 0;
   width: 100%;
+  background: $topnav-color;
   display: flex;
   justify-content: center;
   padding: 10px 0;
+  transition: $tran-05;
 
   input {
     font-family: 'Poppins', sans-serif;
@@ -151,22 +162,6 @@
     background: $body-color;
     color: $text-color;
   }
-}
-
-.home.small-scr-search-bar {
-  visibility: hidden;
-}
-
-@media only screen and (max-width: $sm-screen-size) {
-  .home.small-scr-search-bar.shown {
-    visibility: visible;
-    top: $topnav-height;
-  }
-}
-
-.not-home.small-scr-search-bar {
-  top: 0;
-  transition: $tran-05;
 }
 
 @media only screen and (max-width: $sm-screen-size) {

@@ -17,54 +17,19 @@ export default function Header({ home=false }) {
   
   const { data: session, status } = useSession();
 
-  if (status === "authenticated") {
+  if (status === 'loading') {
+    console.log('loading');
 
-    if (session.accessToken) {
-      console.log(`accessToken: ${session.accessToken}`);
-    }
+  } else if (status === 'authenticated') {
+    const { accessToken, refreshToken } = session.token;
+    const { id, name, email, image } = session.token.user;
 
-    if (session.refreshToken) {
-      console.log(`refreshToken: ${session.refreshToken}`);
-    }
-
-    if (session.user) {
-      console.log(`user: ${session.user}`);
-
-      if (session.user.name) {
-        console.log(`name: ${session.user.name}`);
-      }
-  
-      if (session.user.id) {
-        console.log(`id: ${session.user.id}`);
-      }
-  
-      if (session.user.email) {
-        console.log(`email: ${session.user.email}`);
-      }
-    }
-
-
-    if (session.token) {
-      console.log(`token: ${session.token}`);
-
-      if (session.token.accessToken) {
-        console.log(`token.accessToken: ${session.token.accessToken}`);
-      }
-  
-      if (session.token.refreshToken) {
-        console.log(`token.refreshToken: ${session.token.refreshToken}`);
-      }
-
-      if (session.token.user) {
-        console.log(`session.token.user: ${session.token.user}`)
-        if (session.token.user.name) {
-          console.log(`session.token.user.name: ${session.token.user.name}`)
-          console.log(`session.token.user.email: ${session.token.user.email}`)
-          console.log(`session.token.user.id: ${session.token.user.id}`)
-          console.log(`session.token.user.image: ${session.token.user.image}`)          
-        } 
-      }
-    }
+    console.log(`accessToken: ${accessToken}`);
+    console.log(`refreshToken: ${refreshToken}`);
+    console.log(`id: ${id}`);
+    console.log(`name: ${name}`);
+    console.log(`email: ${email}`);
+    console.log(`image: ${image}`);
 
   } else {
     console.log('not logged in');
@@ -93,8 +58,8 @@ export default function Header({ home=false }) {
   return (
     <div className={styles[theme]}>
     <div className={`
-      ${styles[`${home ? 'home' : 'not-home'}`]}
       ${styles['small-scr-search-bar']}
+      ${styles[`${home ? 'home' : 'not-home'}`]}
       ${styles[smScrSearchClass]}
       `}>
       <input
@@ -103,9 +68,9 @@ export default function Header({ home=false }) {
     </div>
 
     <div className={`
-      ${styles['topnav']} 
-      ${styles[`${home ? 'home' : 'not-home'}`]}`}
-      >
+      ${styles['topnav']}
+      ${styles[`${home ? 'home' : 'not-home'}`]}
+      `}>
       <div className={styles['logo-section']}>
         <div className={styles['logo']}>
           <Image
@@ -126,7 +91,10 @@ export default function Header({ home=false }) {
         <p>MVPlaylist</p>
       </div>
 
-      <div className={styles['search-bar']}>
+      <div className={`
+        ${styles['search-bar']}
+        ${styles[`${home ? 'home' : 'not-home'}`]}
+        `}>
         <i
           className={`
             fa-solid fa-magnifying-glass fa-xl
@@ -158,12 +126,17 @@ export default function Header({ home=false }) {
           />
         </div>
 
-        <button onClick={() => signIn('spotify')}>
-          Login to Spotify
-        </button>
-        <button onClick={() => signOut()}>
-          Sign Out
-        </button>
+        {status === 'unauthenticated' &&
+          <button onClick={() => signIn('spotify')}>
+            Login to Spotify
+          </button>
+        }
+
+        {status === 'authenticated' &&
+          <button onClick={() => signOut()}>
+            Sign Out
+          </button>
+        }
 
       </div>
     </div>

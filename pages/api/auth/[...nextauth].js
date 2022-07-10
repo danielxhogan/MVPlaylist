@@ -49,6 +49,7 @@ export default NextAuth({
 
       if (profile) {
         console.log(`token profile: ${profile}`);
+        token.profile = profile;
 
         if (profile.name) {
           console.log(`token profile.name: ${profile.name}`);
@@ -61,9 +62,9 @@ export default NextAuth({
       if (token) {
         console.log(`token: ${token}`);
 
-      if (token.user) {
+        if (token.user) {
           console.log(`user: ${token.user}`);
-          session.user = token.user;
+          session.tokenUser = token.user;
         }
 
         if (token.accessToken) {
@@ -75,11 +76,18 @@ export default NextAuth({
           console.log(`refreshToken: ${token.refreshToken}`);
           session.refreshToken = token.refreshToken;
         }
+
+        if (token.profile) {
+          console.log(`token.profile: ${token.profile}`);
+          session.profile = profile;
+        }
       }
+
       if (user) {
         console.log(`user: ${user}`);
-        
+        session.user = user;
       }
+
 
       return session;
     },
