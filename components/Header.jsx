@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import styles from '../styles/css/Header.module.css';
@@ -71,25 +72,31 @@ export default function Header({ home=false }) {
       ${styles['topnav']}
       ${styles[`${home ? 'home' : 'not-home'}`]}
       `}>
-      <div className={styles['logo-section']}>
-        <div className={styles['logo']}>
-          <Image
-            src='/images/spotify-icons-logos/icons/Spotify_Icon_RGB_Green.png'
-            width='30px'
-            height='30px'
-            alt='spotify logo'
-          />
+        <div className={styles['logo-section']}>
+          <Link href='/'>
+          <div className={styles['logo']}>
+            <Image
+              src='/images/spotify-icons-logos/icons/Spotify_Icon_RGB_Green.png'
+              width='30px'
+              height='30px'
+              alt='spotify logo'
+            />
 
-          <Image
-            src='/images/youtube-icons-logos/yt_icon_rgb.png'
-            width='45px'
-            height='30px'
-            alt='spotify logo'
-          />
+            <Image
+              src='/images/youtube-icons-logos/yt_icon_rgb.png'
+              width='45px'
+              height='30px'
+              alt='spotify logo'
+            />
+          </div>
+          </Link>
+
+          <Link href='/playlists'>
+          <p>MVPlaylist</p>
+          </Link>
         </div>
+        
 
-        <p>MVPlaylist</p>
-      </div>
 
       <div className={`
         ${styles['search-bar']}
