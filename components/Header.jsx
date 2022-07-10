@@ -22,15 +22,7 @@ export default function Header({ home=false }) {
     console.log('loading');
 
   } else if (status === 'authenticated') {
-    const { accessToken, refreshToken } = session.token;
-    const { id, name, email, image } = session.token.user;
-
-    console.log(`accessToken: ${accessToken}`);
-    console.log(`refreshToken: ${refreshToken}`);
-    console.log(`id: ${id}`);
-    console.log(`name: ${name}`);
-    console.log(`email: ${email}`);
-    console.log(`image: ${image}`);
+    console.log(session);
 
   } else {
     console.log('not logged in');
@@ -133,17 +125,17 @@ export default function Header({ home=false }) {
           />
         </div>
 
-        {status === 'unauthenticated' &&
-          <button onClick={() => signIn('spotify')}>
-            Login to Spotify
-          </button>
-        }
-
-        {status === 'authenticated' &&
-          <button onClick={() => signOut()}>
-            Sign Out
-          </button>
-        }
+          {status === 'unauthenticated' &&
+            <button onClick={() => signIn('spotify')}>
+              Login to Spotify
+            </button>
+          }
+          
+          {status === 'authenticated' &&
+            <button onClick={() => signOut()}>
+              Sign Out
+            </button>
+          }
 
       </div>
     </div>
