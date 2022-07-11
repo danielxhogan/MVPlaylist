@@ -29,6 +29,5 @@ wrapper.getServerSideProps(store => async (context) => {
     };
   }
 
-  console.log(`session.accessToken: ${session.accessToken}`);
   await store.dispatch(getAllPlaylistsAction(context.req, session.accessToken));
 });

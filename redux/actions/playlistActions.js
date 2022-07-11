@@ -17,9 +17,11 @@ export const getAllPlaylistsAction = (req, accessToken) => async (dispatch) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`
       }
-    }
+    };
+
+    const url = `${SPOTIFY_BASE_URL}/me/playlists`;
+    const response = await axios.get(url, config);
     
-    const response = await axios.get(`${SPOTIFY_BASE_URL}/me/playlists`, config);
     console.log(`response.status: ${response.status}`);
     console.log(`response.data: ${response.data}`);
   
@@ -68,8 +70,4 @@ export const getAllPlaylistsAction = (req, accessToken) => async (dispatch) => {
       payload: err.message
     });
   }
-
-
-
-
 }

@@ -1,14 +1,14 @@
 import Header from '../components/Header';
-import MVPlaylist from '../components/MVPlaylist';
+import Search from '../components/Search';
 
 import { authOptions } from './api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
 
-export default function MVPlaylistPage() {
+export default function SearchPage() {
   return (
     <div>
       <Header />
-      <MVPlaylist />
+      <Search />
     </div>
   );
 }
