@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import styles from '../../styles/css/MVPlaylist.module.css';
 
-const DARK = 'dark';
-const LIGHT = 'light';
+import { useSelector } from 'react-redux';
 
 export default function MVPlaylist() {
-  const [ theme, setTheme ] = useState(DARK);
+  const theme = useSelector(state => state.theme);
 
   return (
     <div className={styles[theme]}>

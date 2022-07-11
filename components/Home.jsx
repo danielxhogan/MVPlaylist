@@ -1,19 +1,9 @@
-import { useState } from 'react';
 import styles from '../styles/css/Home.module.css';
 
-const DARK = 'dark';
-const LIGHT = 'light';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
-  const [ theme, setTheme ] = useState(DARK);
-
-  const onClickToggleTheme = () => {
-    switch (theme) {
-      case DARK: setTheme(LIGHT); break;
-      case LIGHT: setTheme(DARK); break;
-      default: break;
-    }
-  }
+  const theme = useSelector(state => state.theme);
   
   return (
     <div className={styles[theme]}>
