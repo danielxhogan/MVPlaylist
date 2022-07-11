@@ -7,5 +7,5 @@ export default function HomePage() {
       <Header home={true}/>
       <Home />
     </div>
-  )
+  );
 }
