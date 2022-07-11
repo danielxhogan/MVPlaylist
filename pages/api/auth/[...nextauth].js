@@ -16,7 +16,6 @@ export const authOptions = {
         token.accessToken = account.access_token;
         token.refreshToken = account.refresh_token;
       }
-
       if (user) {
         token.user = user;
       }
@@ -30,7 +29,6 @@ export const authOptions = {
 
       return session
     }
-  
   }
 }
 

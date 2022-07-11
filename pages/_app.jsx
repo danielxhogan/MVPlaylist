@@ -13,4 +13,4 @@ function MyApp({
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(MyApp);

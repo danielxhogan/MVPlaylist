@@ -1,1 +1,1 @@
-.container{max-width:1500px;padding:0 30px;margin:auto}.dark .playlists{height:100vh;padding-top:70px;background:#18191a;color:#fff}.light .playlists{height:100vh;padding-top:70px;background:#ddd;color:#333}
+.container{max-width:1500px;padding:0 30px;margin:auto}.dark .playlists{height:100vh;padding-top:70px;background:#18191a;color:#fff;transition:all 0.5s ease}.light .playlists{height:100vh;padding-top:70px;background:#ddd;color:#333;transition:all 0.5s ease}

@@ -1,20 +1,71 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession, signIn, signOut } from 'next-auth/react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { DARK, LIGHT } from '../redux/types/themeTypes';
+import {
+  updateThemeLight,
+  updateThemeDark
+} from '../redux/actions/themeActions';
+
 import Image from 'next/image';
 import styles from '../styles/css/Header.module.css';
-
-const DARK = 'dark';
-const LIGHT = 'light';
 
 const SHOWN = 'shown';
 const HIDDEN = 'hidden';
 
 export default function Header({ home=false }) {
-  const [ theme, setTheme ] = useState(DARK);
+  const dispatch = useDispatch();
+  const theme = useSelector(state => state.theme);
+  
   const [ sunClass, setSunClass ] = useState(SHOWN);
   const [ moonClass, setMoonClass ] = useState(HIDDEN);
+
+  const [ mounted, setMounted ] = useState(false);
+  const [ firstRender, setFirstRender ] = useState(true);
+
+  useEffect(() => {
+    setMounted(true);
+  }, [mounted])
+  
+  if (mounted && firstRender) {
+    setFirstRender(false);
+    const localStorageTheme = localStorage.getItem('theme');
+
+    if (!localStorageTheme) {
+      localStorage.setItem('theme', DARK);
+
+    } else if (localStorageTheme === LIGHT) {
+        dispatch(updateThemeLight());
+        setSunClass(HIDDEN);
+        setMoonClass(SHOWN);
+    }
+  }
+
+  const onClickSunIcon = () => {
+    localStorage.setItem('theme', LIGHT);
+    dispatch(updateThemeLight());
+    setSunClass(HIDDEN);
+    setMoonClass(SHOWN);
+  };
+
+  const onClickMoonIcon = () => {
+    localStorage.setItem('theme', DARK);
+    dispatch(updateThemeDark());
+    setMoonClass(HIDDEN);
+    setSunClass(SHOWN);
+  };
+
   const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
+
+  const onClickMagGlass = () => {
+    switch (smScrSearchClass) {
+      case HIDDEN: setSmScrSearchClass(SHOWN); break;
+      case SHOWN: setSmScrSearchClass(HIDDEN); break;
+      default: break;
+    }
+  };
   
   const { data: session, status } = useSession();
 
@@ -27,26 +78,6 @@ export default function Header({ home=false }) {
   } else {
     console.log('not logged in');
   }
-  
-  const onClickMagGlass = () => {
-    switch (smScrSearchClass) {
-      case HIDDEN: setSmScrSearchClass(SHOWN); break;
-      case SHOWN: setSmScrSearchClass(HIDDEN); break;
-      default: break;
-    }
-  };
-  
-  const onClickSunIcon = () => {
-    setTheme(LIGHT);
-    setSunClass(HIDDEN);
-    setMoonClass(SHOWN);
-  };
-
-  const onClickMoonIcon = () => {
-    setTheme(DARK);
-    setMoonClass(HIDDEN);
-    setSunClass(SHOWN);
-  };
 
   return (
     <div className={styles[theme]}>
