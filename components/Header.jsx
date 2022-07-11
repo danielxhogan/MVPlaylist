@@ -21,7 +21,7 @@ export default function Header({ home=false }) {
   
   const [ sunClass, setSunClass ] = useState(SHOWN);
   const [ moonClass, setMoonClass ] = useState(HIDDEN);
-
+  const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
   const [ mounted, setMounted ] = useState(false);
   const [ firstRender, setFirstRender ] = useState(true);
 
@@ -56,8 +56,6 @@ export default function Header({ home=false }) {
     setMoonClass(HIDDEN);
     setSunClass(SHOWN);
   };
-
-  const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
 
   const onClickMagGlass = () => {
     switch (smScrSearchClass) {
@@ -118,8 +116,6 @@ export default function Header({ home=false }) {
           <p>MVPlaylist</p>
           </Link>
         </div>
-        
-
 
       <div className={`
         ${styles['search-bar']}
