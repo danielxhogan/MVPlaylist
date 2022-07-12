@@ -17,8 +17,8 @@ export default function PlaylistsPage() {
 }
 
 export const getServerSideProps =
-wrapper.getServerSideProps(store => async (context) => {
-  const session = await unstable_getServerSession(context.req, context.res, authOptions);
+wrapper.getServerSideProps(store => async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, authOptions);
 
   if (!session) {
     return {
@@ -29,5 +29,5 @@ wrapper.getServerSideProps(store => async (context) => {
     };
   }
 
-  await store.dispatch(getAllPlaylistsAction(context.req, session.accessToken));
+  await store.dispatch(getAllPlaylistsAction(req, session.accessToken));
 });

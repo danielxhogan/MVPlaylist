@@ -152,17 +152,17 @@ export default function Header({ home=false }) {
           />
         </div>
 
-          {status === 'unauthenticated' &&
-            <button onClick={() => signIn('spotify')}>
-              Login to Spotify
-            </button>
-          }
-          
-          {status === 'authenticated' &&
-            <button onClick={() => signOut()}>
-              Sign Out
-            </button>
-          }
+        {status === 'unauthenticated' &&
+          <button onClick={() => signIn('spotify')}>
+            Login to Spotify
+          </button>
+        }
+        
+        {status === 'authenticated' &&
+          <button onClick={() => signOut()}>
+            Sign Out
+          </button>
+        }
 
       </div>
     </div>

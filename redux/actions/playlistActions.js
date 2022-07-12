@@ -43,9 +43,8 @@ export const getAllPlaylistsAction = (req, accessToken) => async (dispatch) => {
           message: err.message
         }
       });
-    }
-  
-    if (err.response.status === 403) {
+
+    } else if (err.response.status === 403) {
       dispatch({
         type: GET_ALL_PLAYLISTS_403,
         payload: {
@@ -53,9 +52,8 @@ export const getAllPlaylistsAction = (req, accessToken) => async (dispatch) => {
           message: err.message
         }
       });
-    }
-  
-    if (err.response.status === 429) {
+
+    } else if (err.response.status === 429) {
       dispatch({
         type: GET_ALL_PLAYLISTS_429,
         payload: {
@@ -63,11 +61,12 @@ export const getAllPlaylistsAction = (req, accessToken) => async (dispatch) => {
           message: err.message
         }
       });
-    }
 
-    dispatch({
-      type: GET_ALL_PLAYLISTS_500,
-      payload: err.message
-    });
+    } else {
+      dispatch({
+        type: GET_ALL_PLAYLISTS_500,
+        payload: err.message
+      });
+    }
   }
 }
