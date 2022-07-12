@@ -10,7 +10,7 @@ import {
 
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
-export const getAllPlaylistsAction = (req, accessToken) => async (dispatch) => {
+export const getAllPlaylistsAction = (accessToken, offset=0) => async (dispatch) => {
   try {
     const config = {
       headers: {
@@ -19,7 +19,7 @@ export const getAllPlaylistsAction = (req, accessToken) => async (dispatch) => {
       }
     };
 
-    const url = `${SPOTIFY_BASE_URL}/me/playlists`;
+    const url = `${SPOTIFY_BASE_URL}/me/playlists?limit=50&offset=${offset}`;
     const response = await axios.get(url, config);
     
     console.log(`response.status: ${response.status}`);

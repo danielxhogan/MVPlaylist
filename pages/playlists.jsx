@@ -1,11 +1,11 @@
 import Header from '../components/Header';
 import Playlists from '../components/Playlists';
-import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
-
-import { wrapper } from '../redux/store';
 
 import { authOptions } from './api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
+
+import { wrapper } from '../redux/store';
+import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
 
 export default function PlaylistsPage() {
   return (
@@ -29,5 +29,5 @@ wrapper.getServerSideProps(store => async ({ req, res }) => {
     };
   }
 
-  await store.dispatch(getAllPlaylistsAction(req, session.accessToken));
+  await store.dispatch(getAllPlaylistsAction(session.accessToken));
 });

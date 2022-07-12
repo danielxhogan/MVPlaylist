@@ -1,10 +1,13 @@
-import { signIn } from 'next-auth/react';
-import { useSelector } from 'react-redux';
+import { signIn, useSession } from 'next-auth/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
 
-import CollectionCard from './Collectioncard';
 import styles from '../styles/css/Playlists.module.css';
 
 export default function Playlists() {
+  const { data: session, status } = useSession();
+  
+  const dispatch = useDispatch();
   const theme = useSelector(state => state.theme);
   const playlists = useSelector(state => state.playlists);
 
@@ -12,13 +15,40 @@ export default function Playlists() {
     signIn('spotify');
   }
 
+  const renderPageButtons = () => {
+    const pages = Math.ceil(playlists.total / 50);
+    let pagesArray = [];
+    for (let i=0; i<pages; i++) { pagesArray.push(i); }
 
+    return (pagesArray.map(page => {
+      return (
+        <button
+          key={page}
+          onClick={() => {
+            dispatch(getAllPlaylistsAction(session.accessToken, 50*page))
+          }}>
+          {page+1}
+        </button>
+      );
+    }));
+  }
+
+  const renderPlaylistCards = (playlists) => {
+    return (playlists.map(playlist => {
+      return (
+        <div key={playlist.id} className={styles['playlist-card']}>
+          { playlist.name }
+        </div>
+      );
+    }));
+  };
 
   return (
     <div className={styles[theme]}>
       <div className={styles['playlists']}>
         <div className={`${styles['content']} ${styles['container']}`}>
-          Playlists
+          { renderPageButtons() }
+          { playlists.items && renderPlaylistCards(playlists.items) }
         </div>
       </div>
     </div>
