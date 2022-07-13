@@ -11,7 +11,7 @@ export default function Playlists() {
   const theme = useSelector(state => state.theme);
   const playlists = useSelector(state => state.playlists);
 
-  if (playlists.status === 401) {
+  if (playlists.error && playlists.error.status === 401) {
     signIn('spotify');
   }
 
@@ -50,12 +50,19 @@ export default function Playlists() {
       <div className={styles['playlists']}>
         <div className={`${styles['content']} ${styles['container']}`}>
 
-          <div className={styles['page-buttons']}>
-            { renderPageButtons() }
-          </div>
-          <div className={styles['playlist-cards']}>
-            { playlists.items && renderPlaylistCards(playlists.items) }
-          </div>
+          { playlists.loading ? (
+            <p>loading</p>
+          ):(
+            <>
+            <div className={styles['page-buttons']}>
+              { renderPageButtons() }
+            </div>
+            <div className={styles['playlist-cards']}>
+              { playlists.items && renderPlaylistCards(playlists.items) }
+            </div>
+            </>
+          )}
+
           
         </div>
       </div>

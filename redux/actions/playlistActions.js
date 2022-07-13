@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import {
+  GET_ALL_PLAYLISTS_LOADING,
   GET_ALL_PLAYLISTS_200,
   GET_ALL_PLAYLISTS_401,
   GET_ALL_PLAYLISTS_403,
@@ -12,6 +13,8 @@ const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
 export const getAllPlaylistsAction = (accessToken, offset=0) => async (dispatch) => {
   try {
+    dispatch({ type: GET_ALL_PLAYLISTS_LOADING });
+    
     const config = {
       headers: {
         'Content-Type': 'application/json',
