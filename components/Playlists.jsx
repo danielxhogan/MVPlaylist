@@ -17,6 +17,7 @@ export default function Playlists() {
 
   const renderPageButtons = () => {
     const pages = Math.ceil(playlists.total / 50);
+    if (pages === 1) { return; }
     let pagesArray = [];
     for (let i=0; i<pages; i++) { pagesArray.push(i); }
 
@@ -24,6 +25,7 @@ export default function Playlists() {
       return (
         <button
           key={page}
+          className={styles['page-button']}
           onClick={() => {
             dispatch(getAllPlaylistsAction(session.accessToken, 50*page))
           }}>
@@ -47,8 +49,14 @@ export default function Playlists() {
     <div className={styles[theme]}>
       <div className={styles['playlists']}>
         <div className={`${styles['content']} ${styles['container']}`}>
-          { renderPageButtons() }
-          { playlists.items && renderPlaylistCards(playlists.items) }
+
+          <div className={styles['page-buttons']}>
+            { renderPageButtons() }
+          </div>
+          <div className={styles['playlist-cards']}>
+            { playlists.items && renderPlaylistCards(playlists.items) }
+          </div>
+          
         </div>
       </div>
     </div>

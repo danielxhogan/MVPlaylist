@@ -12,13 +12,38 @@
   overflow: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 350px));
-  justify-content: space-around;
 }
 
 .content::-webkit-scrollbar {
   display: none;
+}
+
+.page-buttons {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.page-button {
+  margin: 0 10px;
+  height: 30px;
+  width: 30px;
+  background: $body-color;
+  color: $light-text-color;
+  font-size: 1.5rem;
+  border: none;
+  transition: $tran-05;
+
+  &:hover {
+    cursor: pointer;
+    color: $text-color;
+  }
+}
+
+.playlist-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 350px));
+  justify-content: space-around;
 }
 
 .playlist-card {
