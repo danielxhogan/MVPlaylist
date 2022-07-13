@@ -5,7 +5,7 @@ import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
 import styles from '../styles/css/Playlists.module.css';
 
 export default function Playlists() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme);
@@ -53,4 +53,4 @@ export default function Playlists() {
       </div>
     </div>
   );
-}
+};

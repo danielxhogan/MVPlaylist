@@ -21,9 +21,6 @@ export const getAllPlaylistsAction = (accessToken, offset=0) => async (dispatch)
 
     const url = `${SPOTIFY_BASE_URL}/me/playlists?limit=50&offset=${offset}`;
     const response = await axios.get(url, config);
-    
-    console.log(`response.status: ${response.status}`);
-    console.log(`response.data: ${response.data}`);
   
     if (response.status === 200) {
       dispatch({
@@ -69,4 +66,4 @@ export const getAllPlaylistsAction = (accessToken, offset=0) => async (dispatch)
       });
     }
   }
-}
+};
