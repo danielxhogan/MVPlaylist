@@ -1,4 +1,6 @@
 import { signIn, useSession } from 'next-auth/react';
+import Link from 'next/link';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
 
@@ -38,9 +40,11 @@ export default function Playlists() {
   const renderPlaylistCards = (playlists) => {
     return (playlists.map(playlist => {
       return (
-        <div key={playlist.id} className={styles['playlist-card']}>
+        <Link key={playlist.id} href={`/mvplaylist/${playlist.id}`}>
+        <div className={styles['playlist-card']}>
           { playlist.name }
         </div>
+        </Link>
       );
     }));
   };
