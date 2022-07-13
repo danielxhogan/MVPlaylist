@@ -1,0 +1,12 @@
+@import '../globals';
+@import '../utilities';
+
+.dark {
+  @import '../dark-theme';
+  @import './core';
+}
+
+.light {
+  @import '../light-theme';
+  @import './core';
+}

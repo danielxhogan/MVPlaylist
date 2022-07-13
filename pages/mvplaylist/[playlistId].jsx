@@ -1,4 +1,5 @@
 import Header from '../../components/Header';
+import SideNav from '../../components/MVPlaylist/SideNav';
 import MVPlaylist from '../../components/MVPlaylist';
 
 import { unstable_getServerSession } from 'next-auth/next';
@@ -10,6 +11,7 @@ import { getPlaylistItemsAction } from '../../redux/actions/playlistActions';
 export default function MVPlaylistPage() {
   return (
     <div>
+      <SideNav />
       <Header />
       <MVPlaylist />
     </div>

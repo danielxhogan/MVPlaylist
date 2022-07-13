@@ -1,0 +1,36 @@
+.side-nav {
+  position: absolute;
+  color: $spotify-green;
+  background: $sidenav-color;
+  // width: $sidenav-width;
+  width: 0;
+  height: 100vh;
+  padding-top: $topnav-height;
+}
+
+.toggle-container {
+  position: relative;
+  width: 0;
+  white-space: nowrap;
+}
+
+.toggle-button {
+  position: absolute;
+  margin-top: 10px;
+  width: 40px;
+  height: 40px;
+  right: -50px;
+  background: $sidenav-color;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.side-nav-item {
+  opacity: 0;
+}

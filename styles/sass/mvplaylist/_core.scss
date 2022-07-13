@@ -1,7 +1,19 @@
 .mvplaylist {
   height: 100vh;
-  padding-top: $topnav-height;
+  padding-top: $topnav-height + 30px;
   background: $body-color;
   color: $text-color;
   transition: $tran-05;
+
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  padding-left: $sidenav-width;
+}
+
+@media only screen and (max-width: 1400px) {
+  .mvplaylist {
+    flex-direction: column;
+    align-items: center;
+  }
 }

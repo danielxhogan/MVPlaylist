@@ -1,14 +1,23 @@
+import SideNav from './SideNav';
+import PlaylistWindow from './PlaylistWindow';
+import VideoWindow from './VideoWindow';
 import styles from '../../styles/css/MVPlaylist.module.css';
 
 import { useSelector } from 'react-redux';
 
 export default function MVPlaylist() {
   const theme = useSelector(state => state.theme);
+  const playlistItems = useSelector(state => state.playlistItems);
+
+  if (playlistItems.error && playlistItems.error.status === 401) {
+    signIn('spotify');
+  }
 
   return (
     <div className={styles[theme]}>
     <div className={styles['mvplaylist']}>
-      Music Video Playlist
+      <PlaylistWindow />
+      <VideoWindow />
     </div>
     </div>
   );
