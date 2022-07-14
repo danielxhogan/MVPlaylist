@@ -1,17 +1,24 @@
 .side-nav {
   position: absolute;
-  color: $spotify-green;
   background: $sidenav-color;
-  // width: $sidenav-width;
-  width: 0;
   height: 100vh;
   padding-top: $topnav-height;
 }
 
 .toggle-container {
   position: relative;
-  width: 0;
   white-space: nowrap;
+  transition: $tran-05;
+}
+
+.hidden.toggle-container {
+  width: 0;
+  padding: 0;
+}
+
+.shown.toggle-container {
+  width: 300px;
+  padding: 0 10px;
 }
 
 .toggle-button {
@@ -26,11 +33,54 @@
   justify-content: center;
   align-items: center;
 
+  i {
+    color: $spotify-green;
+    transition: $tran-05;
+  }
+
   &:hover {
     cursor: pointer;
   }
 }
 
+.shown.toggle-button {
+  i {
+    transform: rotate(180deg);
+  }
+}
+
+.side-nav-title {
+  font-size: 2rem;
+  color: $spotify-green;
+  overflow: hidden;
+  border-bottom: 2px solid $spotify-green;
+  margin-bottom: 15px;
+}
+
+.hidden.side-nav-title {
+  width: 0;
+  transition: $tran-02;
+}
+
+.shown.side-nav-title {
+  width: auto;
+}
+
 .side-nav-item {
-  opacity: 0;
+  color: $light-text-color;
+  overflow: hidden;
+  transition: $tran-02;
+
+  &:hover {
+    color: $text-color;
+    cursor: pointer;
+  }
+}
+
+.hidden.side-nav-item {
+  width: 0;
+}
+
+.shown.side-nav-item {
+  width: auto;
 }

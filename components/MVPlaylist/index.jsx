@@ -1,4 +1,5 @@
-import SideNav from './SideNav';
+import { signIn } from 'next-auth/react';
+
 import PlaylistWindow from './PlaylistWindow';
 import VideoWindow from './VideoWindow';
 import styles from '../../styles/css/MVPlaylist.module.css';
