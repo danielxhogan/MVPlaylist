@@ -16,7 +16,13 @@
   .mvplaylist {
     padding-top: $topnav-height;
     padding-bottom: 0;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
   }
+}
+
+.toggle-view-btn {
+  position: absolute;
+  top: $topnav-height;
+  right: 0;
 }

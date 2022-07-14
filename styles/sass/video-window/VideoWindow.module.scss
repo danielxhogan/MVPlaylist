@@ -10,3 +10,14 @@
   @import '../light-theme';
   @import './core';
 }
+
+@media only screen and (max-width: 1400px) {
+  .hidden.window {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .shown.window {
+    height: 47%;
+  }
+}
