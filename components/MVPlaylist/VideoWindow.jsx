@@ -6,10 +6,13 @@ export default function VideoWindow() {
   const theme = useSelector(state => state.theme);
 
   return (
-    <div className={styles[theme]}>
+    <div className={`
+    ${styles[theme]}
+    ${styles['window']}
+    `}>
       <div className={`
       ${styles['video-window']}
-      ${styles['window']}
+      
       `}>
         Video Window
       </div>
