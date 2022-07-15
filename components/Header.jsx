@@ -67,15 +67,15 @@ export default function Header({ home=false }) {
   
   const { data: session, status } = useSession();
 
-  if (status === 'loading') {
-    console.log('loading');
+  // if (status === 'loading') {
+  //   console.log('loading');
 
-  } else if (status === 'authenticated') {
-    console.log(session);
+  // } else if (status === 'authenticated') {
+  //   console.log(session);
 
-  } else {
-    console.log('not logged in');
-  }
+  // } else {
+  //   console.log('not logged in');
+  // }
 
   return (
     <div className={styles[theme]}>

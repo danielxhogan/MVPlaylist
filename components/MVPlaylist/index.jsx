@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+
+import { useSelector } from 'react-redux';
 
 import PlaylistWindow from './PlaylistWindow';
 import VideoWindow from './VideoWindow';
 import styles from '../../styles/css/MVPlaylist.module.css';
-
-import { useSelector } from 'react-redux';
 
 const SHOWN = 'shown';
 const HIDDEN = 'hidden';
@@ -14,6 +14,9 @@ const FULL = 'full';
 const HALF = 'half';
 
 export default function MVPlaylist() {
+  const { data: session, status } = useSession();
+  if (status === 'unauthenticated') { signIn('spotify'); }
+
   const [ videoShownHidden, setVideoShownHidden ] = useState(HIDDEN);
   const [ playlistScreenSize, setPlaylistScreenSize ] = useState(FULL);
   
@@ -46,7 +49,6 @@ export default function MVPlaylist() {
     </button>
     <div className={styles['mvplaylist']}>
       <PlaylistWindow screenSize={playlistScreenSize} />
-      { console.log(`playlistScreenSize: ${playlistScreenSize}`) }
       <VideoWindow shownHidden={videoShownHidden} />
     </div>
     </div>

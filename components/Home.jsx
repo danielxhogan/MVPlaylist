@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </div>
       <h1 className={styles['title']}>Music Video Playlist</h1>
-      <p className={styles['subtitle']}>Turn your Spotify playlists into Youtube music video playlists</p>
+      <p className={styles['subtitle']}>Turn your Spotify playlist into a Youtube music video playlist</p>
     </div>
     </div>
     </div>
