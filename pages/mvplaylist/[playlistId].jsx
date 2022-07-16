@@ -6,7 +6,10 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
 
 import { wrapper } from '../../redux/store';
-import { getPlaylistItemsAction } from '../../redux/actions/playlistActions';
+import {
+  getAllPlaylistsAction,
+  getPlaylistItemsAction
+} from '../../redux/actions/playlistActions';
 
 export default function MVPlaylistPage() {
   return (
@@ -31,5 +34,6 @@ wrapper.getServerSideProps(store => async ({ req, res, params }) => {
     };
   }
 
+  await store.dispatch(getAllPlaylistsAction(session.accessToken));
   await store.dispatch(getPlaylistItemsAction(session.accessToken, params.playlistId));
 });

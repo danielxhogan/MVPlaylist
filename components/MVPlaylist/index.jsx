@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 import { useSelector } from 'react-redux';
 
@@ -14,9 +14,6 @@ const FULL = 'full';
 const HALF = 'half';
 
 export default function MVPlaylist() {
-  const { data: session, status } = useSession();
-  if (status === 'unauthenticated') { signIn('spotify'); }
-
   const [ videoShownHidden, setVideoShownHidden ] = useState(HIDDEN);
   const [ playlistScreenSize, setPlaylistScreenSize ] = useState(FULL);
   
