@@ -9,6 +9,10 @@
 .toggle-container {
   position: relative;
   white-space: nowrap;
+  height: 85%;
+  // overflow: scroll;
+  // -ms-overflow-style: none;
+  // scrollbar-width: none;
   transition: $tran-05;
 }
 
@@ -50,6 +54,17 @@
   }
 }
 
+.playlist-container {
+  height: 100%;
+  overflow: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.playlist-container::-webkit-scrollbar {
+  display: none;
+}
+
 .side-nav-title {
   font-size: 2rem;
   color: $spotify-green;
@@ -84,4 +99,42 @@
 
 .shown.side-nav-item {
   width: auto;
+}
+
+.page-buttons {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.hidden.page-buttons {
+  width: 0;
+  overflow: hidden;
+}
+
+.shown.page-buttons {
+  width: auto;
+}
+
+.page-button {
+  height: 30px;
+  background: $sidenav-color;
+  color: $light-text-color;
+  font-size: 1.5rem;
+  border: none;
+  transition: $tran-05;
+
+  &:hover {
+    cursor: pointer;
+    color: $text-color;
+  }
+}
+
+.hidden.page-button {
+  width: 0;
+}
+
+.shown.page-button {
+  width: 30px;
 }
