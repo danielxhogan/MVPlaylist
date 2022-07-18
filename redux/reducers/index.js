@@ -7,11 +7,17 @@ import {
   getPlaylistItemsReducer
 } from './playlistReducers';
 
+import {
+  setAccessToken
+} from './userReducers';
+
 const reducers = combineReducers({
   theme: updateTheme,
 
   playlists: getAllPlaylistsReducer,
-  playlistItems: getPlaylistItemsReducer
+  playlistItems: getPlaylistItemsReducer,
+
+  accessToken: setAccessToken
 });
 
 export default reducers;

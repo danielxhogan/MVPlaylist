@@ -48,7 +48,7 @@
 
   &:hover {
     background: $spotify-green;
-    color: $spot-yt-text;
+    color: $spot-yt-text !important;
     cursor: pointer;
   }
 }
@@ -62,7 +62,10 @@
   margin-left: 20px;
 }
 
+.song-name {
+  // color: $text-color;
+}
+
 .artist-name {
   color: $light-text-color;
-
 }

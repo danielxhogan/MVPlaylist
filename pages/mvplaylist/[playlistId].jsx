@@ -6,6 +6,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
 
 import { wrapper } from '../../redux/store';
+import { SET_ACCESS_TOKEN } from '../../redux/types/userTypes';
 import {
   getAllPlaylistsAction,
   getPlaylistItemsAction
@@ -34,6 +35,7 @@ wrapper.getServerSideProps(store => async ({ req, res, params }) => {
     };
   }
 
+  await store.dispatch({ type: SET_ACCESS_TOKEN, payload: session.accessToken});
   await store.dispatch(getAllPlaylistsAction(session.accessToken));
   await store.dispatch(getPlaylistItemsAction(session.accessToken, params.playlistId));
 });
