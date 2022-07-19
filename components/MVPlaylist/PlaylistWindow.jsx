@@ -16,7 +16,6 @@ export default function PlaylistWindow({ screenSize }) {
 
   const theme = useSelector(state => state.theme);
   const accessToken = useSelector(state => state.accessToken);
-  const playlists = useSelector(state => state.playlists);
   const playlistItems = useSelector(state => state.playlistItems);
 
   const [ deviceId, setDeviceId ] = useState();
@@ -42,41 +41,41 @@ export default function PlaylistWindow({ screenSize }) {
       player.addListener('ready', ({ device_id }) => {
         console.log('Ready with Device ID', device_id);
         setDeviceId(device_id);
-        setContext(device_id);
       });
 
       player.addListener('not_ready', ({ device_id }) => {
-          console.log('Device ID has gone offline', device_id);
+        console.log('Device ID has gone offline', device_id);
       });
 
       player.addListener('player_state_changed', ( state => {
 
-          if (!state) {
-              return;
+        if (!state) {
+            return;
+        }
+        setTrack(state.track_window.current_track);
+        setPaused(state.paused);
+
+        player.getCurrentState().then( state => { 
+            (!state)? setPlayerIsActive(false) : setPlayerIsActive(true) 
+        });
+
+        if (state) {
+          const trackId = state.track_window.current_track.id;
+          let contextIdx = null;
+
+          for (let i=0; i<contextUris.length; i++) {
+            let contextId = contextUris[i].split('spotify:track:')[1];
+            if (contextId === trackId) { contextIdx = i; }
           }
-          setTrack(state.track_window.current_track);
-          setPaused(state.paused);
 
-          player.getCurrentState().then( state => { 
-              (!state)? setPlayerIsActive(false) : setPlayerIsActive(true) 
-          });
-
+          if (contextIdx) {
+            console.log(`contextIdx: ${contextIdx}`);
+            setCurrentContextIdx(contextIdx);
+          }
+        }
       }));
 
       player.connect();
-
-      const setContext = async (device_id) => {
-        const url = `${SPOTIFY_BASE_URL}/me/player/play?device_id=${device_id}`;
-        const body = { 'context_uri': `spotify:playlist:${playlistId}` };
-        const config = {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`
-          }
-        };
-
-        const res = await axios.put(url, body, config);
-      };
     };
 
     // return () => {
@@ -88,7 +87,7 @@ export default function PlaylistWindow({ screenSize }) {
     //   }
     // };
 
-  }, [accessToken, deviceId, playlistId, player])
+  }, [accessToken, deviceId, playlistId, player, contextUris])
 
   useEffect(() => {
     let uris = [];
@@ -109,7 +108,7 @@ export default function PlaylistWindow({ screenSize }) {
         'Authorization': `Bearer ${accessToken}`
       }
     };
-
+    // await axios.put(url, body, config);
     try { await axios.put(url, body, config); }
     catch (err) { window.location.reload(); }
   }
@@ -117,14 +116,12 @@ export default function PlaylistWindow({ screenSize }) {
   const onClickPrevious = () => {
     if (currentContextIdx > 0) {
       setContext(currentContextIdx - 1);
-      setCurrentContextIdx(currentContextIdx - 1);
     }
   }
 
   const onClickNext = () => {
     if (currentContextIdx < contextUris.length) {
       setContext(currentContextIdx + 1);
-      setCurrentContextIdx(currentContextIdx + 1);
     }
   }
 
@@ -144,14 +141,15 @@ export default function PlaylistWindow({ screenSize }) {
           className={styles['playlist-item']}
           onClick={() => onClickPlaylistItem(idx)}
           >
+
           <div className={styles['playlist-item-play-btn']}>
             {song.track.name === currentsong ? (
               <i className='fa-solid fa-pause fa-xl' />  
             ):(
               <i className='fa-solid fa-play fa-xl' />
             )}
-            
           </div>
+
           <div className={styles['playlist-item-content']}>
             <div className={styles['song-name']}>
               { song.track.name }
