@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import Script from 'next/script';
+import Image from 'next/image';
 
 import { useSelector } from 'react-redux';
 
@@ -25,7 +26,6 @@ export default function PlaylistWindow({ screenSize }) {
   const [ contextUris, setContextUris ] = useState([]);
   const [ currentContextIdx, setCurrentContextIdx ] = useState(0);
   const [ paused, setPaused ] = useState(false);
-  const [ currentsong, setCurrentSong ] = useState('Friday');
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -53,6 +53,7 @@ export default function PlaylistWindow({ screenSize }) {
             return;
         }
         setTrack(state.track_window.current_track);
+        console.log(`track: ${state.track_window.current_track.name}`);
         setPaused(state.paused);
 
         player.getCurrentState().then( state => { 
@@ -143,7 +144,7 @@ export default function PlaylistWindow({ screenSize }) {
           >
 
           <div className={styles['playlist-item-play-btn']}>
-            {song.track.name === currentsong ? (
+            {track && song.track.name === track.name ? (
               <i className='fa-solid fa-pause fa-xl' />  
             ):(
               <i className='fa-solid fa-play fa-xl' />
@@ -176,31 +177,54 @@ export default function PlaylistWindow({ screenSize }) {
       `}>
 
       <div className={styles['player-control']}>
-        <div
-          className={styles['player-control-btn']}
-          onClick={ onClickPrevious }
-          >
-          <i className='fa-solid fa-backward-step fa-xl' />
+      {/* <div className={styles['player-control-container']}> */}
+        <div className={styles['current-track-details']}>
+          {track &&
+          <div className={styles['current-track-cover-art']}>
+          <Image
+            src={track.album.images[0].url}
+            height={50}
+            width={50}
+            alt='album conver'
+            />
+          </div>
+          }
+          {track &&
+          <div>
+          <div>{track.name}</div>
+          <div>{track.artists[0].name}</div>
+          </div>
+          }
         </div>
 
-        <div
-          className={styles['player-control-btn']}
-          onClick={ () => player && player.togglePlay() }
-          >
-          {paused ? (
-            <i className='fa-solid fa-play fa-xl' />
-            
-          ):(
-            <i className='fa-solid fa-pause fa-xl' />  
-          )}
-        </div>
+        <div className={styles['player-control-btns']}>
+          <div
+            className={styles['player-control-btn']}
+            onClick={ onClickPrevious }
+            >
+            <i className='fa-solid fa-backward-step fa-xl' />
+          </div>
 
-        <div
-          className={styles['player-control-btn']}
-          onClick={ onClickNext }
-          >
-        <i className='fa-solid fa-forward-step fa-xl' />
+          <div
+            className={styles['player-control-btn']}
+            onClick={ () => player && player.togglePlay() }
+            >
+            {paused ? (
+              <i className='fa-solid fa-play fa-xl' />
+              
+            ):(
+              <i className='fa-solid fa-pause fa-xl' />  
+            )}
+          </div>
+
+          <div
+            className={styles['player-control-btn']}
+            onClick={ onClickNext }
+            >
+          <i className='fa-solid fa-forward-step fa-xl' />
+          </div>
         </div>
+      {/* </div> */}
       </div>
 
       <div className={`
