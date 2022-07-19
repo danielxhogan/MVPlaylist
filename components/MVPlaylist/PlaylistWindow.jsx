@@ -23,6 +23,8 @@ export default function PlaylistWindow({ screenSize }) {
   const [ player, setPlayer ] = useState(undefined);
   const [ playerIsActive, setPlayerIsActive ] = useState(false);
   const [ track, setTrack ] = useState();
+  const [ contextUris, setContextUris ] = useState([]);
+  const [ currentContextIdx, setCurrentContextIdx ] = useState(0);
   const [ paused, setPaused ] = useState(false);
   const [ currentsong, setCurrentSong ] = useState('Friday');
 
@@ -93,42 +95,57 @@ export default function PlaylistWindow({ screenSize }) {
 
   }, [accessToken, deviceId, playlistId, player])
 
-  const onClickPlaylistItem = async (contextUris) => {
-    const url = `${SPOTIFY_BASE_URL}/me/player/play?device_id=${deviceId}`;
-
-    const body = {
-      'uris': contextUris
-    };
-
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        }
-      };
-      try {
-        const res = await axios.put(url, body, config);
-      } catch (err) {
-        window.location.reload();
-      }
-      
-  };
-
-  const renderSongs = () => {
-    let contextUris = [];
+  useEffect(() => {
+    let uris = [];
 
     playlistItems.items && playlistItems.items.map(song => {
-      contextUris.push(song.track.uri);
+      uris.push(song.track.uri);
     });
 
-    let contextUrisUris = [];
-    const iterations = contextUris.length;
+    setContextUris(uris);
+  }, [playlistItems.items])
 
-    for (let i=0; i<iterations; i++) {
-      contextUrisUris.push([...contextUris]);
-      contextUris.shift();
+  const setContext = async (idx) => {
+    const url = `${SPOTIFY_BASE_URL}/me/player/play?device_id=${deviceId}`;
+    const body = { 'uris': contextUris.slice(idx) };
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    };
+
+    try {
+      const res = await axios.put(url, body, config);
+    } catch (err) {
+      window.location.reload();
     }
+  }
 
+  const onClickPrevious = () => {
+    if (currentContextIdx > 0) {
+      setContext(currentContextIdx - 1);
+      setCurrentContextIdx(currentContextIdx - 1);
+    }
+  }
+
+  const onClickNext = () => {
+    if (currentContextIdx < contextUris.length) {
+      setContext(currentContextIdx + 1);
+      setCurrentContextIdx(currentContextIdx + 1);
+    }
+  }
+
+  const onClickPlaylistItem = async (idx) => {
+    setCurrentContextIdx(idx);
+
+    console.log(`contextUris.slice(idx): ${contextUris.slice(idx)}`);
+
+    setContext(idx);
+  };
+
+
+  const renderSongs = () => {
     const songDivs = [];
 
     playlistItems.items && playlistItems.items.forEach((song, idx) => {
@@ -136,7 +153,7 @@ export default function PlaylistWindow({ screenSize }) {
         <div
           key={song.track.id}
           className={styles['playlist-item']}
-          onClick={() => onClickPlaylistItem(contextUrisUris[idx])}
+          onClick={() => onClickPlaylistItem(idx)}
           >
           <div className={styles['playlist-item-play-btn']}>
             {song.track.name === currentsong ? (
@@ -174,7 +191,7 @@ export default function PlaylistWindow({ screenSize }) {
       <div className={styles['player-control']}>
         <div
           className={styles['player-control-btn']}
-          onClick={ () => player && player.previousTrack() }
+          onClick={ onClickPrevious }
           >
           <i className='fa-solid fa-backward-step fa-xl' />
         </div>
@@ -193,7 +210,7 @@ export default function PlaylistWindow({ screenSize }) {
 
         <div
           className={styles['player-control-btn']}
-          onClick={ () => player && player.nextTrack() }
+          onClick={ onClickNext }
           >
         <i className='fa-solid fa-forward-step fa-xl' />
         </div>
