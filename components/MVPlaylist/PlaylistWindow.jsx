@@ -127,10 +127,18 @@ export default function PlaylistWindow({ screenSize }) {
   }
 
   const onClickPlaylistItem = (idx) => {
-    setCurrentContextIdx(idx);
-    setContext(idx);
+    const idxId = contextUris[idx].split('spotify:track:')[1];
+    if ((!track) || (track && (track.id !== idxId))) {
+      setCurrentContextIdx(idx);
+      setContext(idx);
+    }
   };
 
+  const togglePlayCurrentSong = (songId) => {
+    if (player && track && track.id === songId ) {
+      player.togglePlay();
+    }
+  }
 
   const renderSongs = () => {
     const songDivs = [];
@@ -143,8 +151,14 @@ export default function PlaylistWindow({ screenSize }) {
           onClick={() => onClickPlaylistItem(idx)}
           >
 
-          <div className={styles['playlist-item-play-btn']}>
-            {track && song.track.name === track.name ? (
+          <div
+            className={styles['playlist-item-play-btn']}
+            onClick={ () => togglePlayCurrentSong(song.track.id) }
+            >
+            {track &&
+            (song.track.name === track.name) &&
+            (paused === false)
+            ? (
               <i className='fa-solid fa-pause fa-xl' />  
             ):(
               <i className='fa-solid fa-play fa-xl' />
@@ -177,7 +191,6 @@ export default function PlaylistWindow({ screenSize }) {
       `}>
 
       <div className={styles['player-control']}>
-      {/* <div className={styles['player-control-container']}> */}
         <div className={styles['current-track-details']}>
           {track &&
           <div className={styles['current-track-cover-art']}>
@@ -224,7 +237,6 @@ export default function PlaylistWindow({ screenSize }) {
           <i className='fa-solid fa-forward-step fa-xl' />
           </div>
         </div>
-      {/* </div> */}
       </div>
 
       <div className={`

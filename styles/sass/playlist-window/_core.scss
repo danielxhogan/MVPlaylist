@@ -24,18 +24,8 @@
 
 }
 
-// .player-control-container {
-//   position: absolute;
-//   height: 100%;
-//   width: 100%;
-// }
-
 .current-track-details {
   color: $text-color;
-  // position: absolute;
-  // top: 0;
-  // left: 0;
-  // height: 100%;
   white-space: nowrap;
   overflow: hidden;
   display: flex;
@@ -47,7 +37,6 @@
 }
 
 .player-control-btns {
-  // border: 1px solid $primary-color;
   height: 100%;
   display: flex;
   justify-content: flex-end;
