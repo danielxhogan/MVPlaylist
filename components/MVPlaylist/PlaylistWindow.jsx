@@ -67,11 +67,7 @@ export default function PlaylistWindow({ screenSize }) {
 
       const setContext = async (device_id) => {
         const url = `${SPOTIFY_BASE_URL}/me/player/play?device_id=${device_id}`;
-
-        const body = {
-          'context_uri': `spotify:playlist:${playlistId}`
-        };
-  
+        const body = { 'context_uri': `spotify:playlist:${playlistId}` };
         const config = {
           headers: {
             'Content-Type': 'application/json',
@@ -80,7 +76,6 @@ export default function PlaylistWindow({ screenSize }) {
         };
 
         const res = await axios.put(url, body, config);
-        console.log(`context response: ${res.status}`);
       };
     };
 
@@ -115,11 +110,8 @@ export default function PlaylistWindow({ screenSize }) {
       }
     };
 
-    try {
-      const res = await axios.put(url, body, config);
-    } catch (err) {
-      window.location.reload();
-    }
+    try { await axios.put(url, body, config); }
+    catch (err) { window.location.reload(); }
   }
 
   const onClickPrevious = () => {
@@ -136,11 +128,8 @@ export default function PlaylistWindow({ screenSize }) {
     }
   }
 
-  const onClickPlaylistItem = async (idx) => {
+  const onClickPlaylistItem = (idx) => {
     setCurrentContextIdx(idx);
-
-    console.log(`contextUris.slice(idx): ${contextUris.slice(idx)}`);
-
     setContext(idx);
   };
 
