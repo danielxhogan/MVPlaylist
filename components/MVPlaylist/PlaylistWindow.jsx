@@ -23,6 +23,7 @@ export default function PlaylistWindow({ screenSize }) {
   const [ player, setPlayer ] = useState(undefined);
   const [ playerIsActive, setPlayerIsActive ] = useState(false);
   const [ track, setTrack ] = useState();
+  const [ currentTrackId, setCurrentTrackId ] = useState();
   const [ contextUris, setContextUris ] = useState([]);
   const [ currentContextIdx, setCurrentContextIdx ] = useState(0);
   const [ paused, setPaused ] = useState(false);
@@ -53,7 +54,6 @@ export default function PlaylistWindow({ screenSize }) {
             return;
         }
         setTrack(state.track_window.current_track);
-        console.log(`track: ${state.track_window.current_track.name}`);
         setPaused(state.paused);
 
         player.getCurrentState().then( state => { 
@@ -62,16 +62,14 @@ export default function PlaylistWindow({ screenSize }) {
 
         if (state) {
           const trackId = state.track_window.current_track.id;
-          let contextIdx = null;
 
           for (let i=0; i<contextUris.length; i++) {
             let contextId = contextUris[i].split('spotify:track:')[1];
-            if (contextId === trackId) { contextIdx = i; }
-          }
 
-          if (contextIdx) {
-            console.log(`contextIdx: ${contextIdx}`);
-            setCurrentContextIdx(contextIdx);
+            if (contextId === trackId) {
+              setCurrentContextIdx(i);
+              setCurrentTrackId(contextId);
+            }
           }
         }
       }));
@@ -116,26 +114,34 @@ export default function PlaylistWindow({ screenSize }) {
 
   const onClickPrevious = () => {
     if (currentContextIdx > 0) {
+      const contextId = contextUris[currentContextIdx - 1].split('spotify:track:')[1];
+      setCurrentTrackId(contextId);
       setContext(currentContextIdx - 1);
+      setCurrentContextIdx(currentContextIdx - 1);
     }
   }
 
   const onClickNext = () => {
     if (currentContextIdx < contextUris.length) {
+      const contextId = contextUris[currentContextIdx + 1].split('spotify:track:')[1];
+      setCurrentTrackId(contextId);
       setContext(currentContextIdx + 1);
+      setCurrentContextIdx(currentContextIdx + 1);
     }
   }
 
-  const onClickPlaylistItem = (idx) => {
+  const onClickPlaylistItem = async (idx) => {
     const idxId = contextUris[idx].split('spotify:track:')[1];
-    if ((!track) || (track && (track.id !== idxId))) {
+
+    if (currentTrackId !== idxId) {
       setCurrentContextIdx(idx);
       setContext(idx);
+      setCurrentTrackId(idxId);
     }
   };
 
   const togglePlayCurrentSong = (songId) => {
-    if (player && track && track.id === songId ) {
+    if (player && track && currentTrackId === songId ) {
       player.togglePlay();
     }
   }
