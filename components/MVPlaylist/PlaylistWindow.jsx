@@ -77,15 +77,6 @@ export default function PlaylistWindow({ screenSize }) {
       player.connect();
     };
 
-    // return () => {
-    //   if (player) {
-    //     player.removeListener('ready');
-    //     player.removeListener('not_ready');
-    //     player.removeListener('player_state_changed');
-    //     player.disconnect();
-    //   }
-    // };
-
   }, [accessToken, deviceId, playlistId, player, contextUris])
 
   useEffect(() => {
@@ -141,7 +132,7 @@ export default function PlaylistWindow({ screenSize }) {
   };
 
   const togglePlayCurrentSong = (songId) => {
-    if (player && track && currentTrackId === songId ) {
+    if (player && currentTrackId === songId ) {
       player.togglePlay();
     }
   }
@@ -210,8 +201,8 @@ export default function PlaylistWindow({ screenSize }) {
           }
           {track &&
           <div>
-          <div>{track.name}</div>
-          <div>{track.artists[0].name}</div>
+            <div>{track.name}</div>
+            <div>{track.artists[0].name}</div>
           </div>
           }
         </div>
@@ -230,7 +221,6 @@ export default function PlaylistWindow({ screenSize }) {
             >
             {paused ? (
               <i className='fa-solid fa-play fa-xl' />
-              
             ):(
               <i className='fa-solid fa-pause fa-xl' />  
             )}
@@ -240,7 +230,7 @@ export default function PlaylistWindow({ screenSize }) {
             className={styles['player-control-btn']}
             onClick={ onClickNext }
             >
-          <i className='fa-solid fa-forward-step fa-xl' />
+            <i className='fa-solid fa-forward-step fa-xl' />
           </div>
         </div>
       </div>

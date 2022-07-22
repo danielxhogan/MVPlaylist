@@ -7,6 +7,11 @@ import {
   getPlaylistItemsReducer
 } from './playlistReducers';
 
+
+import {
+  getYoutubeResultsReducer,
+} from './youtubeReducers';
+
 import {
   setAccessToken
 } from './userReducers';
@@ -16,6 +21,8 @@ const reducers = combineReducers({
 
   playlists: getAllPlaylistsReducer,
   playlistItems: getPlaylistItemsReducer,
+
+  youtubeResults: getYoutubeResultsReducer,
 
   accessToken: setAccessToken
 });
