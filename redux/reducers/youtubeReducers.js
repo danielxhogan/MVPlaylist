@@ -15,7 +15,10 @@ export const getYoutubeResultsReducer = (state={}, action) => {
       }
 
     case GET_YOUTUBE_RESULTS_200:
-     return action.payload;
+     return {
+       data: action.payload.data,
+       query: action.payload.query
+     }
 
     case GET_YOUTUBE_RESULTS_400:
       return {

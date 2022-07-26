@@ -4,16 +4,23 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import Image from 'next/image';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions'
 
 import axios from 'axios';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
-import styles from '../../styles/css/PlaylistWindow.module.css';
+import styles from '../../styles/css/playlist-window/PlaylistWindow.module.css';
 
-export default function PlaylistWindow({ screenSize }) {
+export default function PlaylistWindow({
+  screenSize,
+  setViewExpanded,
+  setViewCollapsed
+}) {
   const router = useRouter();
   const { playlistId } = router.query;
+
+  const dispatch = useDispatch();
 
   const theme = useSelector(state => state.theme);
   const accessToken = useSelector(state => state.accessToken);
@@ -137,38 +144,68 @@ export default function PlaylistWindow({ screenSize }) {
     }
   }
 
+  const onClickMagGlass = (song) => {
+    const songName = song.track.name;
+    const artist = song.track.artists[0].name;
+    const queryString = `${songName} ${artist}`;
+    console.log(`queryString: ${queryString}`);
+    dispatch(getYoutubeResultsAction(queryString));
+    setViewExpanded();
+  }
+
   const renderSongs = () => {
     const songDivs = [];
 
     playlistItems.items && playlistItems.items.forEach((song, idx) => {
       songDivs.push(
-        <div
-          key={song.track.id}
-          className={styles['playlist-item']}
-          onClick={() => onClickPlaylistItem(idx)}
-          >
-
+        <div class={styles['playlist-item-container']}>
           <div
-            className={styles['playlist-item-play-btn']}
-            onClick={ () => togglePlayCurrentSong(song.track.id) }
+            key={song.track.id}
+            className={styles['playlist-item']}
+            onClick={() => onClickPlaylistItem(idx)}
             >
-            {track &&
-            (song.track.name === track.name) &&
-            (paused === false)
-            ? (
-              <i className='fa-solid fa-pause fa-xl' />  
-            ):(
-              <i className='fa-solid fa-play fa-xl' />
-            )}
+
+            <div
+              className={styles['playlist-item-play-btn']}
+              onClick={ () => togglePlayCurrentSong(song.track.id) }
+              >
+              {track &&
+              (song.track.name === track.name) &&
+              (paused === false)
+              ? (
+                <i className='fa-solid fa-pause fa-xl' />  
+              ):(
+                <i className='fa-solid fa-play fa-xl' />
+              )}
+            </div>
+
+            <div className={styles['playlist-item-content']}>
+              <div className={styles['song-name']}>
+                { song.track.name }
+              </div>
+              <div className={styles['artist-name']}>
+                { song.track.artists[0].name }
+              </div>
+            </div>
           </div>
 
-          <div className={styles['playlist-item-content']}>
-            <div className={styles['song-name']}>
-              { song.track.name }
-            </div>
-            <div className={styles['artist-name']}>
-              { song.track.artists[0].name }
-            </div>
+          <div className={styles['magnifying-glass']}>
+            <i
+              className={`
+                fa-solid fa-magnifying-glass fa-xl
+                
+              `}
+              onClick={() => onClickMagGlass(song)}
+            />
+          </div>
+
+          <div className={styles['yt-button']}>
+            <Image
+              src='/images/youtube-icons-logos/yt_icon_rgb.png'
+              width='45px'
+              height='30px'
+              alt='spotify logo'
+            />
           </div>
         </div>
       );
@@ -201,8 +238,8 @@ export default function PlaylistWindow({ screenSize }) {
           }
           {track &&
           <div>
-            <div>{track.name}</div>
-            <div>{track.artists[0].name}</div>
+          <div>{track.name}</div>
+          <div>{track.artists[0].name}</div>
           </div>
           }
         </div>
@@ -230,7 +267,7 @@ export default function PlaylistWindow({ screenSize }) {
             className={styles['player-control-btn']}
             onClick={ onClickNext }
             >
-            <i className='fa-solid fa-forward-step fa-xl' />
+          <i className='fa-solid fa-forward-step fa-xl' />
           </div>
         </div>
       </div>

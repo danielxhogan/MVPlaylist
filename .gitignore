@@ -7,6 +7,8 @@
 /styles/css/testing-ground/
 /styles/css/PlaylistWidgetMobile.module.css
 
+jsconfig.json
+
 # dependencies
 /node_modules
 /.pnp

@@ -22,9 +22,8 @@ export const getYoutubeResultsAction = (searchTerm) => async (dispatch) => {
     const maxResults = 'maxResults=5';
     const params = `${q}&${key}&${part}&${type}&${maxResults}`;
     const url = `${YOUTUBE_BASE_URL}?${params}`;
-    
     console.log(`url: ${url}`);
-
+    console.log(`url: ${url}`);
     const response = await axios.get(url);
 
     if (response.status === 200) {
@@ -32,13 +31,16 @@ export const getYoutubeResultsAction = (searchTerm) => async (dispatch) => {
 
       dispatch({
         type: GET_YOUTUBE_RESULTS_200,
-        payload: response.data
+        payload: {
+          data: response.data,
+          query: searchTerm
+        }
       });
     }
   } catch (err) {
     console.log(`getYoutubeResultsAction error: ${err.message}`);
 
-    if (err.response.status === 400) {
+    if (err.response && err.response.status === 400) {
       console.log(`err.response.status: ${err.response.status}`);
       dispatch({
         type: GET_YOUTUBE_RESULTS_400,

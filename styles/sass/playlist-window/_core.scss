@@ -54,11 +54,18 @@
   }
 }
 
+.playlist-item-container {
+  // border: 1px solid $primary-color;
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr;
+}
+
 .playlist-item {
   white-space: nowrap;
   overflow: hidden;
   height: 75px;
-  margin: 20px;
+  // width: 75%;
+  margin: 10px;
   padding: 10px;
   border-top: 1px solid $light-text-color;
   border-radius: 5px;
@@ -88,4 +95,24 @@
 
 .artist-name {
   color: $light-text-color;
+}
+
+.magnifying-glass {
+  color: $light-text-color;
+  // border: 1px solid $primary-color;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: $tran-02;
+
+  &:hover {
+    cursor: pointer;
+    color: $text-color;
+  }
+}
+
+.yt-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

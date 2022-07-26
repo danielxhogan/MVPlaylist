@@ -1,16 +1,23 @@
 import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions'
 
-import styles from '../../styles/css/VideoWindow.module.css';
+import styles from '../../styles/css/video-window/VideoWindow.module.css';
 
-
-export default function VideoWindow({ shownHidden }) {
+export default function VideoWindow({
+  shownHidden,
+  setViewExpanded,
+  setViewCollapsed
+}) {
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme);
+  const {
+    data: youtubeResults,
+    query
+  } = useSelector(state => state.youtubeResults);
 
   useEffect(() => {
-    dispatch(getYoutubeResultsAction('nope'));
   })
 
   return (

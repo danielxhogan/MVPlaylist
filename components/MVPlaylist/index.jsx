@@ -24,6 +24,16 @@ export default function MVPlaylist() {
     signIn('spotify');
   }
 
+  const setViewExpanded = () => {
+    setVideoShownHidden(SHOWN);
+    setPlaylistScreenSize(HALF);
+  }
+
+  const setViewCollapsed = () => {
+    setVideoShownHidden(HIDDEN);
+    setPlaylistScreenSize(FULL);
+  }  
+
   const onClickToggleView = () => {
      switch (videoShownHidden) {
       case HIDDEN: setVideoShownHidden(SHOWN); break;
@@ -45,8 +55,16 @@ export default function MVPlaylist() {
       Toggle View
     </button>
     <div className={styles['mvplaylist']}>
-      <PlaylistWindow screenSize={playlistScreenSize} />
-      <VideoWindow shownHidden={videoShownHidden} />
+      <PlaylistWindow
+        screenSize={playlistScreenSize}
+        setViewExpanded={setViewExpanded}
+        setViewCollapsed={setViewCollapsed}
+      />
+      <VideoWindow
+        shownHidden={videoShownHidden}
+        setViewExpanded={setViewExpanded}
+        setViewCollapsed={setViewCollapsed}
+      />
     </div>
     </div>
   );
