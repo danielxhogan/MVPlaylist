@@ -238,8 +238,8 @@ export default function PlaylistWindow({
           }
           {track &&
           <div>
-          <div>{track.name}</div>
-          <div>{track.artists[0].name}</div>
+            <div>{track.name}</div>
+            <div>{track.artists[0].name}</div>
           </div>
           }
         </div>
@@ -267,7 +267,7 @@ export default function PlaylistWindow({
             className={styles['player-control-btn']}
             onClick={ onClickNext }
             >
-          <i className='fa-solid fa-forward-step fa-xl' />
+            <i className='fa-solid fa-forward-step fa-xl' />
           </div>
         </div>
       </div>
