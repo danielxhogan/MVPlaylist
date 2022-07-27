@@ -28,7 +28,7 @@ export default function Header({ home=false }) {
   useEffect(() => {
     setMounted(true);
   }, [mounted])
-  
+
   if (mounted && firstRender) {
     setFirstRender(false);
     const localStorageTheme = localStorage.getItem('theme');

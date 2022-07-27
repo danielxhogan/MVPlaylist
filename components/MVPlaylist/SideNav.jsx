@@ -5,8 +5,6 @@ import { getAllPlaylistsAction } from '../../redux/actions/playlistActions';
 
 import styles from '../../styles/css/SideNav.module.css';
 
-
-
 const SHOWN = 'shown';
 const HIDDEN = 'hidden';
 

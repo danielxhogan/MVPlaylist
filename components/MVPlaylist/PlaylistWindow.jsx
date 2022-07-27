@@ -10,12 +10,12 @@ import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions'
 import axios from 'axios';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
-import styles from '../../styles/css/playlist-window/PlaylistWindow.module.css';
+import styles from '../../styles/css/PlaylistWindow.module.css';
 
 export default function PlaylistWindow({
   screenSize,
   setViewExpanded,
-//setViewCollapsed
+//  setViewCollapsed
 }) {
   const router = useRouter();
   const { playlistId } = router.query;
@@ -28,7 +28,7 @@ export default function PlaylistWindow({
 
   const [ deviceId, setDeviceId ] = useState();
   const [ player, setPlayer ] = useState(undefined);
-//const [ playerIsActive, setPlayerIsActive ] = useState(false);
+//  const [ playerIsActive, setPlayerIsActive ] = useState(false);
   const [ track, setTrack ] = useState();
   const [ currentTrackId, setCurrentTrackId ] = useState();
   const [ contextUris, setContextUris ] = useState([]);
@@ -158,7 +158,7 @@ export default function PlaylistWindow({
 
     playlistItems.items && playlistItems.items.forEach((song, idx) => {
       songDivs.push(
-        <div class={styles['playlist-item-container']}>
+        <div className={styles['playlist-item-container']}>
           <div
             key={song.track.id}
             className={styles['playlist-item']}
@@ -191,10 +191,7 @@ export default function PlaylistWindow({
 
           <div className={styles['magnifying-glass']}>
             <i
-              className={`
-                fa-solid fa-magnifying-glass fa-xl
-                
-              `}
+              className={`fa-solid fa-magnifying-glass fa-xl`}
               onClick={() => onClickMagGlass(song)}
             />
           </div>
