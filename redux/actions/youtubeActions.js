@@ -11,7 +11,10 @@ const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 // const KEY = process.env.YOUTUBE_API_KEY;
 const KEY = 'AIzaSyCAw2xACgUNyRdIH2KMgOnktj5o9Sfc6Os';
 
-export const getYoutubeResultsAction = (searchTerm) => async (dispatch) => {
+export const getYoutubeResultsAction = (
+  searchTerm,
+  songId
+) => async (dispatch) => {
   try {
     dispatch({ type: GET_YOUTUBE_RESULTS_LOADING });
 
@@ -33,7 +36,8 @@ export const getYoutubeResultsAction = (searchTerm) => async (dispatch) => {
         type: GET_YOUTUBE_RESULTS_200,
         payload: {
           data: response.data,
-          query: searchTerm
+          query: searchTerm,
+          songId
         }
       });
     }

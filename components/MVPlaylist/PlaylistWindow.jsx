@@ -149,7 +149,10 @@ export default function PlaylistWindow({
     const artist = song.track.artists[0].name;
     const queryString = `${songName} ${artist}`;
     console.log(`queryString: ${queryString}`);
-    dispatch(getYoutubeResultsAction(queryString));
+
+    const songId = song.track.id;
+
+    dispatch(getYoutubeResultsAction(queryString, songId));
     setViewExpanded();
   }
 

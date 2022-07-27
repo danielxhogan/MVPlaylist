@@ -13,7 +13,8 @@ export default function VideoWindow({
   const theme = useSelector(state => state.theme);
   const {
     data: youtubeResults,
-    query
+    query,
+    songId
   } = useSelector(state => state.youtubeResults);
 
   const onSubmitAddVideo = (e) => {
