@@ -11,6 +11,8 @@ const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 // const KEY = process.env.YOUTUBE_API_KEY;
 const KEY = 'AIzaSyCAw2xACgUNyRdIH2KMgOnktj5o9Sfc6Os';
 
+const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
+
 export const getYoutubeResultsAction = (
   searchTerm,
   songId
@@ -62,3 +64,36 @@ export const getYoutubeResultsAction = (
     }
   }
 }
+
+export const addVideoAction = (
+  accessToken,
+  playlistId,
+  songId,
+  videoId
+) => async (dispatch) => {
+  try {
+    console.log(`accessToken: ${accessToken}`);
+    console.log(`songId: ${songId}`);
+    console.log(`videoId: ${videoId}`);
+    console.log(`playlistId: ${playlistId}`);
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      }
+    };
+
+    const url = `${SPOTIFY_BASE_URL}/me`;
+    const response = await axios.get(url, config);
+    const userId = response.data.id;
+    console.log(`userId: ${userId}`);
+
+  } catch (err) {
+    console.log(`getYoutubeResultsAction error: ${err.message}`);
+  }
+}
+
+
+
+

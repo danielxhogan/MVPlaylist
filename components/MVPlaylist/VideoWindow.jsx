@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
 import { useDispatch, useSelector } from 'react-redux';
-import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions'
+import { addVideoAction } from '../../redux/actions/youtubeActions';
 
 import styles from '../../styles/css/VideoWindow.module.css';
 
@@ -9,8 +11,12 @@ export default function VideoWindow({
 //  setViewExpanded,
   setViewCollapsed
 }) {
-//  const dispatch = useDispatch();
+  const router = useRouter();
+  const { playlistId } = router.query;
+
+  const dispatch = useDispatch();
   const theme = useSelector(state => state.theme);
+  const accessToken = useSelector(state => state.accessToken);
   const {
     data: youtubeResults,
     query,
@@ -23,6 +29,8 @@ export default function VideoWindow({
       setViewCollapsed();
       const videoId = e.target['yt-radio-group'].value;
       console.log(`videoId: ${videoId}`)
+
+      dispatch(addVideoAction(accessToken, playlistId, songId, videoId))
     }
   }
 
