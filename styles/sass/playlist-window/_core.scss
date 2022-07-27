@@ -11,6 +11,7 @@
 }
 
 .player-control {
+  z-index: 1;
   position: absolute;
   background: $topnav-color;
   width: 100%;

@@ -7,18 +7,15 @@ import styles from '../../styles/css/video-window/VideoWindow.module.css';
 
 export default function VideoWindow({
   shownHidden,
-  setViewExpanded,
-  setViewCollapsed
+//setViewExpanded,
+//setViewCollapsed
 }) {
-  const dispatch = useDispatch();
+//const dispatch = useDispatch();
   const theme = useSelector(state => state.theme);
-  const {
-    data: youtubeResults,
-    query
-  } = useSelector(state => state.youtubeResults);
-
-  useEffect(() => {
-  })
+//const {
+//  data: youtubeResults,
+//  query
+//} = useSelector(state => state.youtubeResults);
 
   return (
     <div className={`

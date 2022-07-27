@@ -92,6 +92,7 @@
   display: none;
 }
 .dark .player-control {
+  z-index: 1;
   position: absolute;
   background: #242526;
   width: 100%;
@@ -185,6 +186,7 @@
   display: none;
 }
 .light .player-control {
+  z-index: 1;
   position: absolute;
   background: #fff;
   width: 100%;
