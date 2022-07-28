@@ -28,7 +28,7 @@ export default function PlaylistWindow({
 
   const [ deviceId, setDeviceId ] = useState();
   const [ player, setPlayer ] = useState(undefined);
-//  const [ playerIsActive, setPlayerIsActive ] = useState(false);
+  const [ playerIsActive, setPlayerIsActive ] = useState(false);
   const [ track, setTrack ] = useState();
   const [ currentTrackId, setCurrentTrackId ] = useState();
   const [ contextUris, setContextUris ] = useState([]);

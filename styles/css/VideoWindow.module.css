@@ -82,7 +82,6 @@
   }
 }
 .dark .video-window {
-  border: 1px solid silver;
   height: 100%;
   overflow: scroll;
   -ms-overflow-style: none;
@@ -145,7 +144,6 @@
 }
 
 .light .video-window {
-  border: 1px solid silver;
   height: 100%;
   overflow: scroll;
   -ms-overflow-style: none;

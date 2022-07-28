@@ -95,7 +95,7 @@ export default function VideoWindow({
 
           <div>
             { query }
-            { youtubeResults &&  renderVideos() }
+            { youtubeResults && renderVideos() }
           </div>
 
           <div className={styles['video-btns']}>
@@ -107,6 +107,7 @@ export default function VideoWindow({
                 Add Video
               </button>
             </div>
+
             <div onClick={onClickCancelBtn}>
               <button
                 className={styles['cancel-btn']}

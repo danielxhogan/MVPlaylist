@@ -38,7 +38,7 @@ export const getAllPlaylistsAction = (accessToken, offset=0) => async (dispatch)
         payload: response.data
       });
     }
-  
+
   } catch (err) {
     console.log(`getAllPlaylistsAction error: ${err.message}`);
 

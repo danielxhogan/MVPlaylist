@@ -26,9 +26,8 @@ export const getYoutubeResultsAction = (
     const type = 'type=video';
     const maxResults = 'maxResults=5';
     const params = `${q}&${key}&${part}&${type}&${maxResults}`;
+
     const url = `${YOUTUBE_BASE_URL}?${params}`;
-    console.log(`url: ${url}`);
-    console.log(`url: ${url}`);
     const response = await axios.get(url);
 
     if (response.status === 200) {
@@ -93,7 +92,3 @@ export const addVideoAction = (
     console.log(`getYoutubeResultsAction error: ${err.message}`);
   }
 }
-
-
-
-
