@@ -8,7 +8,6 @@ import styles from '../../styles/css/VideoWindow.module.css';
 
 export default function VideoWindow({
   shownHidden,
-//  setViewExpanded,
   setViewCollapsed
 }) {
   const router = useRouter();
