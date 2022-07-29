@@ -2,7 +2,7 @@ import nc from 'next-connect';
 import dbConnect from '../../../models/db';
 import { getVideos } from '../../../controllers/yt/ytControllers';
 
-console.log('inside addVideo endpoint');
+console.log('inside getVideos endpoint');
 
 const handler = nc();
 dbConnect();

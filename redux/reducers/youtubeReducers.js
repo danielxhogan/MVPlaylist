@@ -71,21 +71,12 @@ export const getVideosReducer = (state={}, action) => {
   switch (action.type) {
 
     case GET_VIDEOS_200:
-      return {
-        success: true,
-        data: action.payload
-      };
+      return action.payload.songs;
 
     case GET_VIDEOS_404:
       return {
         success: false,
         error: action.payload
-      };
-
-    case ADD_VIDEO_REFRESH:
-      return {
-       success: false,
-       error: false
       };
 
     default:

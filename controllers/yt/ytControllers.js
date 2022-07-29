@@ -88,7 +88,7 @@ export const getVideos = async (req, res) => {
     if (playlist) {
       res.status(200).json({
         sucess: true,
-        playlist
+        songs: playlist.songs
       })
 
     } else {

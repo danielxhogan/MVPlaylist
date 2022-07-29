@@ -129,6 +129,7 @@ export const getVideosAction = (
     const { origin } = absoluteUrl(req);
     const params = `userId=${userId}&playlistId=${playlistId}`;
     const url = `${origin}/api/yt/getvideos?${params}`;
+//    const url = `/api/yt/getvideos?${params}`;
     const res = await axios.get(url);
 
     if (res.status === 200) {
@@ -141,7 +142,7 @@ export const getVideosAction = (
   } catch (err) {
     console.log(`getVideosAction error: ${err.message}`);
 
-    if (err.response.status === 404) {
+    if (err.status === 404) {
       dispatch({
         type: GET_VIDEOS_404,
         payload: {

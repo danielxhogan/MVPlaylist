@@ -7,5 +7,5 @@ export const ADD_VIDEO_200 = 'ADD_VIDEO_200';
 export const ADD_VIDEO_500 = 'ADD_VIDEO_500';
 export const ADD_VIDEO_REFRESH = 'ADD_VIDEO_REFRESH';
 
-export const GET_VIDES_200 = 'GET_VIDES_200';
-export const GET_VIDES_404 = 'GET_VIDES_404';
+export const GET_VIDEOS_200 = 'GET_VIDEOS_200';
+export const GET_VIDEOS_404 = 'GET_VIDEOS_404';
