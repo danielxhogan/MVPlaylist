@@ -3,15 +3,10 @@ import User from '../../models/user';
 export const addVideo = async (req, res) => {
   const { userId, playlistId, songId, videoId } = req.body;
 
-  console.log(`inside addVideo: ${typeof userId}, ${playlistId}, ${songId}, ${videoId}`);
+  console.log(`inside addVideo: ${userId}, ${playlistId}, ${songId}, ${videoId}`);
 
   const user = await User.findOne({ spotifyUserId: userId }).exec();
   console.log(`User.findOne: ${user}`);
-
-//  const user = await User.where({ spotifyUserId: userId });
-//  console.log(`user: ${typeof user}`);
-//  const count = await user.countDocuments();
-//  console.log(`user count: ${count}`);
 
   if (user) {
     console.log(`user exists: ${user}`);
@@ -78,4 +73,35 @@ export const addVideo = async (req, res) => {
   res.status(200).json({
     success: true
   })
+}
+
+export const getVideos = async (req, res) => {
+  const { userId, playlistId } = req.query;
+
+  const user = await User.findOne({ spotifyUserId: userId }).exec();
+
+  if (user) {
+    const playlist = user.playlists.find(
+      p => p.playlistId === playlistId
+    )
+
+    if (playlist) {
+      res.status(200).json({
+        sucess: true,
+        playlist
+      })
+
+    } else {
+      res.status(404).json({
+        success: false,
+        message: 'no playlist found with this id'
+      })
+    }
+
+  } else {
+    res.status(404).json({
+      sucess: false,
+      message: 'no user found with this id'
+    })
+  }
 }

@@ -1,10 +1,17 @@
 import axios from 'axios';
+import absoluteUrl from 'next-absolute-url';
 
 import {
   GET_YOUTUBE_RESULTS_LOADING,
   GET_YOUTUBE_RESULTS_200,
   GET_YOUTUBE_RESULTS_400,
   GET_YOUTUBE_RESULTS_500,
+
+  ADD_VIDEO_200,
+  ADD_VIDEO_500,
+
+  GET_VIDEOS_200,
+  GET_VIDEOS_404
 } from '../types/youtubeTypes';
 
 const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
@@ -104,7 +111,44 @@ export const addVideoAction = (
     const res = await axios.post('/api/yt/addvideo', body, apiConfig);
     console.log(`addVideoAction res: ${res}`);
 
+    if (res.status === 200) {
+      dispatch({ type: ADD_VIDEO_200 });
+    }
   } catch (err) {
     console.log(`getYoutubeResultsAction error: ${err.message}`);
+    dispatch({ type: ADD_VIDEO_500 });
+  }
+}
+
+export const getVideosAction = (
+  req,
+  userId,
+  playlistId,
+) => async (dispatch) => {
+  try {
+    const { origin } = absoluteUrl(req);
+    const params = `userId=${userId}&playlistId=${playlistId}`;
+    const url = `${origin}/api/yt/getvideos?${params}`;
+    const res = await axios.get(url);
+
+    if (res.status === 200) {
+      dispatch({
+        type: GET_VIDEOS_200,
+        payload: res.data
+      })
+    }
+
+  } catch (err) {
+    console.log(`getVideosAction error: ${err.message}`);
+
+    if (err.response.status === 404) {
+      dispatch({
+        type: GET_VIDEOS_404,
+        payload: {
+          status: err.response.status,
+          data: err.response.data
+        }
+      })
+    }
   }
 }

@@ -3,6 +3,12 @@ import {
   GET_YOUTUBE_RESULTS_200,
   GET_YOUTUBE_RESULTS_400,
   GET_YOUTUBE_RESULTS_500,
+
+  ADD_VIDEO_200,
+  ADD_VIDEO_500,
+  ADD_VIDEO_REFRESH,
+  GET_VIDEOS_200,
+  GET_VIDEOS_404,
 } from '../types/youtubeTypes';
 
 
@@ -15,18 +21,18 @@ export const getYoutubeResultsReducer = (state={}, action) => {
       }
 
     case GET_YOUTUBE_RESULTS_200:
-     return {
-       data: action.payload.data,
-       query: action.payload.query,
-       songId: action.payload.songId
-     }
+      return {
+        data: action.payload.data,
+        query: action.payload.query,
+        songId: action.payload.songId
+      }
 
     case GET_YOUTUBE_RESULTS_400:
       return {
         loading: true,
         error: action.payload
       };
-  
+
     case GET_YOUTUBE_RESULTS_500:
       return action.payload;
 
@@ -34,3 +40,55 @@ export const getYoutubeResultsReducer = (state={}, action) => {
       return state;
   }
 }
+
+export const addVideoReducer = (state={}, action) => {
+  switch (action.type) {
+
+    case ADD_VIDEO_200:
+      return {
+        success: true,
+        error: false
+      }
+
+    case ADD_VIDEO_500:
+      return {
+        success: false,
+        error: true
+      };
+  
+    case ADD_VIDEO_REFRESH:
+      return {
+        success: false,
+        error: false
+      };
+
+    default:
+      return state;
+  }
+}
+
+export const getVideosReducer = (state={}, action) => {
+  switch (action.type) {
+
+    case GET_VIDEOS_200:
+      return {
+        success: true,
+        data: action.payload
+      };
+
+    case GET_VIDEOS_404:
+      return {
+        success: false,
+        error: action.payload
+      };
+
+    case ADD_VIDEO_REFRESH:
+      return {
+       success: false,
+       error: false
+      };
+
+    default:
+      return state;
+  };
+};

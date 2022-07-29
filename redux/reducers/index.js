@@ -10,6 +10,8 @@ import {
 
 import {
   getYoutubeResultsReducer,
+  addVideoReducer,
+  getVideosReducer
 } from './youtubeReducers';
 
 import {
@@ -23,6 +25,8 @@ const reducers = combineReducers({
   playlistItems: getPlaylistItemsReducer,
 
   youtubeResults: getYoutubeResultsReducer,
+  addVideoStatus: addVideoReducer,
+  videos: getVideosReducer,
 
   accessToken: setAccessToken
 });

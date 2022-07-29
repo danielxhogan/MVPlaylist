@@ -7,6 +7,7 @@ import { authOptions } from '../api/auth/[...nextauth]';
 
 import { wrapper } from '../../redux/store';
 import { SET_ACCESS_TOKEN } from '../../redux/types/userTypes';
+import { getVideosAction } from '../../redux/actions/youtubeActions';
 import {
   getAllPlaylistsAction,
   getPlaylistItemsAction
