@@ -18,6 +18,7 @@ export default function VideoWindow({
   const theme = useSelector(state => state.theme);
   const accessToken = useSelector(state => state.accessToken);
   const userId = useSelector(state => state.userId);
+  const video = useSelector(state => state.video);
   const {
     data: youtubeResults,
     query,
@@ -97,12 +98,12 @@ export default function VideoWindow({
             className={styles['video-select-form']}
             onSubmit={onSubmitAddVideo}
             >
-  
+
             <div>
               { query }
               { youtubeResults && renderVideos() }
             </div>
-  
+
             <div className={styles['video-btns']}>
               <div>
                 <button
@@ -112,7 +113,7 @@ export default function VideoWindow({
                   Add Video
                 </button>
               </div>
-  
+
               <div onClick={onClickCancelBtn}>
                 <button
                   className={styles['cancel-btn']}
@@ -121,8 +122,11 @@ export default function VideoWindow({
                 </button>
               </div>
             </div>
-  
+
           </form>
+        }
+        {video && video.videoId &&
+          <iframe width="560" height="315" src={`https://www.youtube.com/embed/${video.videoId}`} title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
         }
 
       </div>

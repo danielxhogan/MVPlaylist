@@ -76,7 +76,7 @@ export const addVideoReducer = (state={}, action) => {
   };
 };
 
-export const getVideosReducer = (state={}, action) => {
+export const getVideosReducer = (state=[], action) => {
   switch (action.type) {
 
     case GET_VIDEOS_200:

@@ -7,8 +7,11 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions';
 import { getVideosClientSideAction } from '../../redux/actions/youtubeActions';
-import { PLAY_VIDEO } from '../../redux/types/youtubeTypes';
-import { ADD_VIDEO_REFRESH } from '../../redux/types/youtubeTypes';
+import {
+  PLAY_VIDEO,
+  ADD_VIDEO_REFRESH,
+  PLAY_VIDEO_REFRESH
+} from '../../redux/types/youtubeTypes';
 
 import axios from 'axios';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
@@ -238,7 +241,8 @@ export default function PlaylistWindow({
   const checkForVideo = (songId) => {
     let matchingVideoId;
 
-    videos.forEach(video => {
+    console.log(`videos type: ${typeof videos}`);
+    videos && videos.forEach(video => {
       if (video.songId === songId) {
         matchingVideoId = video.videoId;
       };
