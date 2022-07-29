@@ -88,6 +88,22 @@ export const addVideoAction = (
     const userId = response.data.id;
     console.log(`userId: ${userId}`);
 
+    const body = {
+      userId,
+      playlistId,
+      songId,
+      videoId
+    };
+
+    const apiConfig = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.post('/api/yt/addvideo', body, apiConfig);
+    console.log(`addVideoAction res: ${res}`);
+
   } catch (err) {
     console.log(`getYoutubeResultsAction error: ${err.message}`);
   }

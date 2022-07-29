@@ -18,7 +18,7 @@ const userSchema = new Schema({
             required: true
           },
           videoId: {
-            type: string,
+            type: String,
             required: true
           }
         }
