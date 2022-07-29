@@ -18,7 +18,7 @@ export const addVideo = async (req, res) => {
       console.log(`playlist: ${playlist}`);
       const song = playlist.songs.find(
         s => s.songId === songId
-      )
+      );
 
       if (song) {
         console.log(`song: ${song}`);
@@ -31,8 +31,8 @@ export const addVideo = async (req, res) => {
             songId,
             videoId
           }
-        )
-      }
+        );
+      };
 
     } else {
       console.log(`playlist doesnt exist`);
@@ -46,7 +46,7 @@ export const addVideo = async (req, res) => {
             }
           ]
         }
-      )
+      );
     }
 
   } else {
@@ -64,16 +64,16 @@ export const addVideo = async (req, res) => {
           ]
         }
       ]
-    })
-  }
+    });
+  };
 
-  const response = await user.save({ validateBeforeSave: false })
-  console.log(`addVideo user.save: ${response}`)
+  const response = await user.save({ validateBeforeSave: false });
+  console.log(`addVideo user.save: ${response}`);
 
   res.status(200).json({
     success: true
-  })
-}
+  });
+};
 
 export const getVideos = async (req, res) => {
   const { userId, playlistId } = req.query;
@@ -83,25 +83,25 @@ export const getVideos = async (req, res) => {
   if (user) {
     const playlist = user.playlists.find(
       p => p.playlistId === playlistId
-    )
+    );
 
     if (playlist) {
       res.status(200).json({
         sucess: true,
         songs: playlist.songs
-      })
+      });
 
     } else {
       res.status(404).json({
         success: false,
         message: 'no playlist found with this id'
-      })
-    }
+      });
+    };
 
   } else {
     res.status(404).json({
       sucess: false,
       message: 'no user found with this id'
-    })
-  }
-}
+    });
+  };
+};

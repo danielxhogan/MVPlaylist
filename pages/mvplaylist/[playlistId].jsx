@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import Header from '../../components/Header';
 import SideNav from '../../components/MVPlaylist/SideNav';
 import MVPlaylist from '../../components/MVPlaylist';
@@ -45,7 +43,21 @@ wrapper.getServerSideProps(store => async ({ req, res, params }) => {
   }
 
   await store.dispatch({ type: SET_USER_ID, payload: session.user.id});
-  await store.dispatch( getVideosAction(req, session.user.id, params.playlistId) );
+  await store.dispatch({ type: SET_ACCESS_TOKEN, payload: session.accessToken});
+
+  await store.dispatch(
+    getVideosAction(
+      req,
+      session.user.id,
+      params.playlistId
+    )
+  );
+
   await store.dispatch(getAllPlaylistsAction(session.accessToken));
-  await store.dispatch(getPlaylistItemsAction(session.accessToken, params.playlistId));
+  await store.dispatch(
+    getPlaylistItemsAction(
+      session.accessToken,
+      params.playlistId
+    )
+  );
 });

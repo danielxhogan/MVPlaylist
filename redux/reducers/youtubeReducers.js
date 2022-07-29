@@ -19,14 +19,14 @@ export const getYoutubeResultsReducer = (state={}, action) => {
     case GET_YOUTUBE_RESULTS_LOADING:
       return {
         loading: true
-      }
+      };
 
     case GET_YOUTUBE_RESULTS_200:
       return {
         data: action.payload.data,
         query: action.payload.query,
         songId: action.payload.songId
-      }
+      };
 
     case GET_YOUTUBE_RESULTS_400:
       return {
@@ -39,8 +39,8 @@ export const getYoutubeResultsReducer = (state={}, action) => {
 
     default:
       return state;
-  }
-}
+  };
+};
 
 export const addVideoReducer = (state={}, action) => {
   switch (action.type) {
@@ -49,7 +49,7 @@ export const addVideoReducer = (state={}, action) => {
       return {
         success: true,
         error: false
-      }
+      };
 
     case ADD_VIDEO_500:
       return {
@@ -65,8 +65,8 @@ export const addVideoReducer = (state={}, action) => {
 
     default:
       return state;
-  }
-}
+  };
+};
 
 export const getVideosReducer = (state={}, action) => {
   switch (action.type) {

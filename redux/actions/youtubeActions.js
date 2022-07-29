@@ -18,8 +18,6 @@ const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
 // const KEY = process.env.YOUTUBE_API_KEY;
 const KEY = 'AIzaSyCAw2xACgUNyRdIH2KMgOnktj5o9Sfc6Os';
 
-const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
-
 export const getYoutubeResultsAction = (
   searchTerm,
   songId
@@ -48,7 +46,7 @@ export const getYoutubeResultsAction = (
           songId
         }
       });
-    }
+    };
   } catch (err) {
     console.log(`getYoutubeResultsAction error: ${err.message}`);
 
@@ -67,9 +65,9 @@ export const getYoutubeResultsAction = (
         type: GET_YOUTUBE_RESULTS_500,
         payload: err.message
       });
-    }
-  }
-}
+    };
+  };
+};
 
 export const addVideoAction = (
   userId,
@@ -100,12 +98,13 @@ export const addVideoAction = (
 
     if (res.status === 200) {
       dispatch({ type: ADD_VIDEO_200 });
-    }
+    };
+
   } catch (err) {
     console.log(`getYoutubeResultsAction error: ${err.message}`);
     dispatch({ type: ADD_VIDEO_500 });
-  }
-}
+  };
+};
 
 export const getVideosAction = (
   req,
@@ -123,8 +122,8 @@ export const getVideosAction = (
       dispatch({
         type: GET_VIDEOS_200,
         payload: res.data
-      })
-    }
+      });
+    };
 
   } catch (err) {
     console.log(`getVideosAction error: ${err.message}`);
@@ -136,7 +135,7 @@ export const getVideosAction = (
           status: err.response.status,
           data: err.response.data
         }
-      })
-    }
-  }
-}
+      });
+    };
+  };
+};
