@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions'
+import { PLAY_VIDEO } from '../../redux/types/youtubeTypes';
 
 import axios from 'axios';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
@@ -237,7 +238,7 @@ export default function PlaylistWindow({
       return (
         <div
           className={styles['yt-button']}
-//          onClick={playVideo}
+          onClick={() => playVideo(videoId)}
           >
           <Image
             src='/images/youtube-icons-logos/yt_icon_rgb.png'
@@ -250,6 +251,16 @@ export default function PlaylistWindow({
     } else {
       return <div></div>
     };
+  };
+
+  const playVideo = (videoId) => {
+    setViewExpanded();
+    console.log(`videoId: ${videoId}`);
+
+    dispatch({
+      type: PLAY_VIDEO,
+      payload: videoId
+    });
   };
 
   return (

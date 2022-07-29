@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { addVideoAction } from '../../redux/actions/youtubeActions';
 
+import { GET_YOUTUBE_RESULTS_REFRESH } from '../../redux/types/youtubeTypes';
+
 import styles from '../../styles/css/VideoWindow.module.css';
 
 export default function VideoWindow({
@@ -30,13 +32,15 @@ export default function VideoWindow({
       const videoId = e.target['yt-radio-group'].value;
       console.log(`videoId: ${videoId}`)
 
+      dispatch({ type: GET_YOUTUBE_RESULTS_REFRESH });
       dispatch(addVideoAction(userId, playlistId, songId, videoId))
-    }
-  }
+    };
+  };
 
   const onClickCancelBtn = () => {
      setViewCollapsed();
-  }
+      dispatch({ type: GET_YOUTUBE_RESULTS_REFRESH });
+  };
 
   const renderVideos = () => {
     return (
@@ -89,36 +93,38 @@ export default function VideoWindow({
         ${styles['video-window']}
         `}>
 
-        <form
-          className={styles['video-select-form']}
-          onSubmit={onSubmitAddVideo}
-          >
-
-          <div>
-            { query }
-            { youtubeResults && renderVideos() }
-          </div>
-
-          <div className={styles['video-btns']}>
+        {youtubeResults && youtubeResults.items &&
+          <form
+            className={styles['video-select-form']}
+            onSubmit={onSubmitAddVideo}
+            >
+  
             <div>
-              <button
-                className={styles['add-video-btn']}
-                type='submit'
-                >
-                Add Video
-              </button>
+              { query }
+              { youtubeResults && renderVideos() }
             </div>
-
-            <div onClick={onClickCancelBtn}>
-              <button
-                className={styles['cancel-btn']}
-                >
-                Cancel
-              </button>
+  
+            <div className={styles['video-btns']}>
+              <div>
+                <button
+                  className={styles['add-video-btn']}
+                  type='submit'
+                  >
+                  Add Video
+                </button>
+              </div>
+  
+              <div onClick={onClickCancelBtn}>
+                <button
+                  className={styles['cancel-btn']}
+                  >
+                  Cancel
+                </button>
+              </div>
             </div>
-          </div>
-
-        </form>
+  
+          </form>
+        }
 
       </div>
     </div>
