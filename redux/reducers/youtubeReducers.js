@@ -3,6 +3,7 @@ import {
   GET_YOUTUBE_RESULTS_200,
   GET_YOUTUBE_RESULTS_400,
   GET_YOUTUBE_RESULTS_500,
+  GET_YOUTUBE_RESULTS_REFRESH,
 
   ADD_VIDEO_200,
   ADD_VIDEO_500,
@@ -10,6 +11,8 @@ import {
 
   GET_VIDEOS_200,
   GET_VIDEOS_404,
+  PLAY_VIDEO,
+  PLAY_VIDEO_REFRESH
 } from '../types/youtubeTypes';
 
 
@@ -36,6 +39,11 @@ export const getYoutubeResultsReducer = (state={}, action) => {
 
     case GET_YOUTUBE_RESULTS_500:
       return action.payload;
+
+    case GET_YOUTUBE_RESULTS_REFRESH:
+      return {
+        refresh: true
+      };
 
     default:
       return state;
@@ -78,6 +86,24 @@ export const getVideosReducer = (state={}, action) => {
       return {
         success: false,
         error: action.payload
+      };
+
+    default:
+      return state;
+  };
+};
+
+export const playVideoReducer = (state={}, action) => {
+  switch (action.type) {
+
+    case PLAY_VIDEO:
+      return {
+        videoId: action.payload
+      };
+
+    case PLAY_VIDEO_REFRESH:
+      return {
+        refresh: true,
       };
 
     default:
