@@ -5,8 +5,10 @@ import Script from 'next/script';
 import Image from 'next/image';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions'
+import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions';
+import { getVideosClientSideAction } from '../../redux/actions/youtubeActions';
 import { PLAY_VIDEO } from '../../redux/types/youtubeTypes';
+import { ADD_VIDEO_REFRESH } from '../../redux/types/youtubeTypes';
 
 import axios from 'axios';
 const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
@@ -25,8 +27,10 @@ export default function PlaylistWindow({
 
   const theme = useSelector(state => state.theme);
   const accessToken = useSelector(state => state.accessToken);
+  const userId = useSelector(state => state.userId);
   const playlistItems = useSelector(state => state.playlistItems);
   const videos = useSelector(state => state.videos);
+  const addVideoStatus = useSelector(state => state.addVideoStatus);
 
   const [ deviceId, setDeviceId ] = useState();
   const [ player, setPlayer ] = useState(undefined);
@@ -97,6 +101,18 @@ export default function PlaylistWindow({
 
     setContextUris(uris);
   }, [playlistItems.items])
+
+  useEffect(() => {
+    if (addVideoStatus.success === true) {
+      dispatch({ type: ADD_VIDEO_REFRESH });
+      dispatch(
+        getVideosClientSideAction(
+          userId,
+          playlistId
+        )
+      );
+    };
+  }, [addVideoStatus, dispatch, userId, playlistId]);
 
   const setContext = async (idx) => {
     const url = `${SPOTIFY_BASE_URL}/me/player/play?device_id=${deviceId}`;

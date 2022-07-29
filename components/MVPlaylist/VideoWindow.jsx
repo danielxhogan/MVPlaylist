@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addVideoAction } from '../../redux/actions/youtubeActions';
-
 import { GET_YOUTUBE_RESULTS_REFRESH } from '../../redux/types/youtubeTypes';
 
 import styles from '../../styles/css/VideoWindow.module.css';
@@ -38,8 +37,8 @@ export default function VideoWindow({
   };
 
   const onClickCancelBtn = () => {
-     setViewCollapsed();
-      dispatch({ type: GET_YOUTUBE_RESULTS_REFRESH });
+    setViewCollapsed();
+    dispatch({ type: GET_YOUTUBE_RESULTS_REFRESH });
   };
 
   const renderVideos = () => {

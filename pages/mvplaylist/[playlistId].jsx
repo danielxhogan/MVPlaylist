@@ -6,7 +6,7 @@ import { unstable_getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
 
 import { wrapper } from '../../redux/store';
-import { getVideosAction } from '../../redux/actions/youtubeActions';
+import { getVideosServerSideAction } from '../../redux/actions/youtubeActions';
 
 import {
   SET_ACCESS_TOKEN,
@@ -46,7 +46,7 @@ wrapper.getServerSideProps(store => async ({ req, res, params }) => {
   await store.dispatch({ type: SET_ACCESS_TOKEN, payload: session.accessToken });
 
   await store.dispatch(
-    getVideosAction(
+    getVideosServerSideAction(
       req,
       session.user.id,
       params.playlistId

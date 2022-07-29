@@ -106,7 +106,7 @@ export const addVideoAction = (
   };
 };
 
-export const getVideosAction = (
+export const getVideosServerSideAction = (
   req,
   userId,
   playlistId,
@@ -116,6 +116,38 @@ export const getVideosAction = (
     const params = `userId=${userId}&playlistId=${playlistId}`;
     const url = `${origin}/api/yt/getvideos?${params}`;
 //    const url = `/api/yt/getvideos?${params}`;
+    const res = await axios.get(url);
+
+    if (res.status === 200) {
+      dispatch({
+        type: GET_VIDEOS_200,
+        payload: res.data
+      });
+    };
+
+  } catch (err) {
+    console.log(`getVideosAction error: ${err.message}`);
+
+    if (err.status === 404) {
+      dispatch({
+        type: GET_VIDEOS_404,
+        payload: {
+          status: err.response.status,
+          data: err.response.data
+        }
+      });
+    };
+  };
+};
+
+export const getVideosClientSideAction = (
+  userId,
+  playlistId,
+) => async (dispatch) => {
+  try {
+    const params = `userId=${userId}&playlistId=${playlistId}`;
+//    const url = `${origin}/api/yt/getvideos?${params}`;
+    const url = `/api/yt/getvideos?${params}`;
     const res = await axios.get(url);
 
     if (res.status === 200) {
