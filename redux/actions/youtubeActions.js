@@ -72,28 +72,15 @@ export const getYoutubeResultsAction = (
 }
 
 export const addVideoAction = (
-  accessToken,
+  userId,
   playlistId,
   songId,
   videoId
 ) => async (dispatch) => {
   try {
-    console.log(`accessToken: ${accessToken}`);
     console.log(`songId: ${songId}`);
     console.log(`videoId: ${videoId}`);
     console.log(`playlistId: ${playlistId}`);
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      }
-    };
-
-    const url = `${SPOTIFY_BASE_URL}/me`;
-    const response = await axios.get(url, config);
-    const userId = response.data.id;
-    console.log(`userId: ${userId}`);
 
     const body = {
       userId,

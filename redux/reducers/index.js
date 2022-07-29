@@ -15,7 +15,8 @@ import {
 } from './youtubeReducers';
 
 import {
-  setAccessToken
+  setAccessToken,
+  setUserId
 } from './userReducers';
 
 const reducers = combineReducers({
@@ -28,7 +29,8 @@ const reducers = combineReducers({
   addVideoStatus: addVideoReducer,
   videos: getVideosReducer,
 
-  accessToken: setAccessToken
+  accessToken: setAccessToken,
+  userId: setUserId
 });
 
 export default reducers;

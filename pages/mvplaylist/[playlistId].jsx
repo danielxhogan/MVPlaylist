@@ -20,8 +20,6 @@ import {
   getPlaylistItemsAction
 } from '../../redux/actions/playlistActions';
 
-const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
-
 export default function MVPlaylistPage() {
   return (
     <div>
@@ -45,17 +43,6 @@ wrapper.getServerSideProps(store => async ({ req, res, params }) => {
       }
     };
   }
-
-//  const config = {
-//    headers: {
-//      'Content-Type': 'application/json',
-//      'Authorization': `Bearer ${session.accessToken}`
-//    }
-//  };
-//
-//  const url = `${SPOTIFY_BASE_URL}/me`;
-//  const response = await axios.get(url, config);
-//  const userId = response.data.id;
 
   await store.dispatch({ type: SET_USER_ID, payload: session.user.id});
   await store.dispatch( getVideosAction(req, session.user.id, params.playlistId) );

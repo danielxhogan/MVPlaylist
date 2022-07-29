@@ -16,6 +16,7 @@ export default function VideoWindow({
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme);
   const accessToken = useSelector(state => state.accessToken);
+  const userId = useSelector(state => state.userId);
   const {
     data: youtubeResults,
     query,
@@ -29,7 +30,7 @@ export default function VideoWindow({
       const videoId = e.target['yt-radio-group'].value;
       console.log(`videoId: ${videoId}`)
 
-      dispatch(addVideoAction(accessToken, playlistId, songId, videoId))
+      dispatch(addVideoAction(userId, playlistId, songId, videoId))
     }
   }
 
