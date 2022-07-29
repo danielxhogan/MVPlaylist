@@ -25,6 +25,7 @@ export default function PlaylistWindow({
   const theme = useSelector(state => state.theme);
   const accessToken = useSelector(state => state.accessToken);
   const playlistItems = useSelector(state => state.playlistItems);
+  const videos = useSelector(state => state.videos);
 
   const [ deviceId, setDeviceId ] = useState();
   const [ player, setPlayer ] = useState(undefined);
@@ -213,6 +214,40 @@ export default function PlaylistWindow({
 
     return songDivs;
   }
+
+  const checkForVideo = (songId) => {
+    let matchingVideoId;
+
+    videos.forEach(video => {
+      if (video.songId === songId) {
+        matchingVideoId = video.videoId;
+      };
+    });
+
+    return matchingVideoId;
+  }
+
+  const renderYTIcon = (songId) => {
+    const videoId = checkForVideo(songId);
+
+    if (videoId) {
+      return (
+        <div
+          className={styles['yt-button']}
+          onClick={playVideo}
+          >
+          <Image
+            src='/images/youtube-icons-logos/yt_icon_rgb.png'
+            width='45px'
+            height='30px'
+            alt='spotify logo'
+          />
+        </div>
+      );
+    } else {
+      return <div></div>
+    };
+  };
 
   return (
     <>
