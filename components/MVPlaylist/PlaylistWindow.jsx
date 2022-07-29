@@ -200,6 +200,8 @@ export default function PlaylistWindow({
             />
           </div>
 
+          { renderYTIcon(song.track.id) }
+{/*
           <div className={styles['yt-button']}>
             <Image
               src='/images/youtube-icons-logos/yt_icon_rgb.png'
@@ -208,6 +210,7 @@ export default function PlaylistWindow({
               alt='spotify logo'
             />
           </div>
+*/}
         </div>
       );
     })
@@ -234,7 +237,7 @@ export default function PlaylistWindow({
       return (
         <div
           className={styles['yt-button']}
-          onClick={playVideo}
+//          onClick={playVideo}
           >
           <Image
             src='/images/youtube-icons-logos/yt_icon_rgb.png'
