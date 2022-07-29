@@ -26,7 +26,7 @@ export default function MVPlaylistPage() {
       <MVPlaylist />
     </div>
   );
-}
+};
 
 export const getServerSideProps =
 wrapper.getServerSideProps(store => async ({ req, res, params }) => {
@@ -40,10 +40,10 @@ wrapper.getServerSideProps(store => async ({ req, res, params }) => {
         permanent: false
       }
     };
-  }
+  };
 
-  await store.dispatch({ type: SET_USER_ID, payload: session.user.id});
-  await store.dispatch({ type: SET_ACCESS_TOKEN, payload: session.accessToken});
+  await store.dispatch({ type: SET_USER_ID, payload: session.user.id });
+  await store.dispatch({ type: SET_ACCESS_TOKEN, payload: session.accessToken });
 
   await store.dispatch(
     getVideosAction(

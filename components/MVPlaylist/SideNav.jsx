@@ -27,10 +27,13 @@ export default function SideNav() {
     return (playlists.map(playlist => {
       return (
         <Link key={playlist.id} href={`/mvplaylist/${playlist.id}`}>
-        <div className={`
-          ${styles['side-nav-item']}
-          ${styles[shownHidden]}
-        `}>
+        <div
+          className={`
+            ${styles['side-nav-item']}
+            ${styles[shownHidden]}
+          `}
+          onClick={() => setShownHidden(HIDDEN)}
+          >
           { playlist.name }
         </div>
         </Link>
