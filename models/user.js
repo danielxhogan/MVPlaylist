@@ -25,6 +25,6 @@ const userSchema = new Schema({
       ]
     }
   ]
-})
+});
 
 export default models.User || model('User', userSchema);

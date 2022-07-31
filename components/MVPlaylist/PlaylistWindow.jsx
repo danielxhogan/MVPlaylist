@@ -221,16 +221,7 @@ export default function PlaylistWindow({
           </div>
 
           { renderYTIcon(song.track.id) }
-{/*
-          <div className={styles['yt-button']}>
-            <Image
-              src='/images/youtube-icons-logos/yt_icon_rgb.png'
-              width='45px'
-              height='30px'
-              alt='spotify logo'
-            />
-          </div>
-*/}
+
         </div>
       );
     })
