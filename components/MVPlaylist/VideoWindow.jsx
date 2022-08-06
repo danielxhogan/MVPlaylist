@@ -93,6 +93,21 @@ export default function VideoWindow({
         ${styles['video-window']}
         `}>
 
+        {video && video.videoId &&
+          <div className={styles['iframe-container']}>
+            <iframe
+              className={styles['yt-iframe']}
+              width="1000"
+              height="430"
+              src={`https://www.youtube.com/embed/${video.videoId}`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen>
+            </iframe>
+          </div>
+        }
+
         {youtubeResults && youtubeResults.items &&
           <form
             className={styles['video-select-form']}
@@ -124,18 +139,6 @@ export default function VideoWindow({
             </div>
 
           </form>
-        }
-
-        {video && video.videoId &&
-          <iframe
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/${video.videoId}`}
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen>
-          </iframe>
         }
 
       </div>

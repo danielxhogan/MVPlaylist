@@ -90,6 +90,14 @@
 .dark .video-window::-webkit-scrollbar {
   display: none;
 }
+.dark .video-select-form {
+  margin-top: 30px;
+}
+.dark .iframe-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .dark .video-item {
   overflow: hidden;
   height: 130px;
@@ -151,6 +159,14 @@
 }
 .light .video-window::-webkit-scrollbar {
   display: none;
+}
+.light .video-select-form {
+  margin-top: 30px;
+}
+.light .iframe-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .light .video-item {
   overflow: hidden;
