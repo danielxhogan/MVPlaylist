@@ -98,7 +98,7 @@ export default function VideoWindow({
             <iframe
               className={styles['yt-iframe']}
               width="1000"
-              height="430"
+              height="400"
               src={`https://www.youtube.com/embed/${video.videoId}`}
               title="YouTube video player"
               frameBorder="0"

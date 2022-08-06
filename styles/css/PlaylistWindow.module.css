@@ -174,6 +174,9 @@
   justify-content: center;
   align-items: center;
 }
+.dark .yt-button img:hover {
+  cursor: pointer;
+}
 
 .light .playlist-window {
   height: 100%;
@@ -267,6 +270,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.light .yt-button img:hover {
+  cursor: pointer;
 }
 
 .window {
