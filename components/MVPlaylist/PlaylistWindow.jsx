@@ -276,7 +276,10 @@ export default function PlaylistWindow({
   const playVideo = (videoId) => {
     setViewExpanded();
     setPlayerControlView(HIDDEN);
-    player && player.togglePlay();
+
+    if (!paused) {
+      player && player.togglePlay();
+    };
 
     dispatch({
       type: PLAY_VIDEO,
