@@ -103,6 +103,12 @@
   justify-content: space-between;
   align-items: center;
 }
+.dark .hidden.player-control {
+  opacity: 0;
+}
+.dark .hidden.player-control {
+  opacity: 0;
+}
 .dark .current-track-details {
   color: #fff;
   white-space: nowrap;
@@ -199,6 +205,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.light .hidden.player-control {
+  opacity: 0;
+}
+.light .hidden.player-control {
+  opacity: 0;
 }
 .light .current-track-details {
   color: #333;

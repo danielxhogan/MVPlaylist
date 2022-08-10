@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { addVideoAction } from '../../redux/actions/youtubeActions';
-import { GET_YOUTUBE_RESULTS_REFRESH } from '../../redux/types/youtubeTypes';
+import { ADD_VIDEO_REFRESH, GET_YOUTUBE_RESULTS_REFRESH } from '../../redux/types/youtubeTypes';
 
 import styles from '../../styles/css/VideoWindow.module.css';
 
@@ -27,10 +27,14 @@ export default function VideoWindow({
 
   const onSubmitAddVideo = (e) => {
     e.preventDefault();
+
     if (e.target['yt-radio-group'] && e.target['yt-radio-group'].value) {
-      setViewCollapsed();
+
+      if (video.refresh) {
+        setViewCollapsed();
+      };
+
       const videoId = e.target['yt-radio-group'].value;
-      console.log(`videoId: ${videoId}`)
 
       dispatch({ type: GET_YOUTUBE_RESULTS_REFRESH });
       dispatch(addVideoAction(userId, playlistId, songId, videoId))
@@ -38,7 +42,9 @@ export default function VideoWindow({
   };
 
   const onClickCancelBtn = () => {
-    setViewCollapsed();
+    if (video.refresh) {
+      setViewCollapsed();
+    };
     dispatch({ type: GET_YOUTUBE_RESULTS_REFRESH });
   };
 

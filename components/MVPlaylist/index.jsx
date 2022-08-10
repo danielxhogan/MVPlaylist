@@ -48,12 +48,14 @@ export default function MVPlaylist() {
 
   return (
     <div className={styles[theme]}>
+    {/*
     <button
-    className={styles['toggle-view-btn']}
+      className={styles['toggle-view-btn']}
       onClick={onClickToggleView}
       >
       Toggle View
     </button>
+    */}
     <div className={styles['mvplaylist']}>
       <PlaylistWindow
         screenSize={playlistScreenSize}

@@ -22,7 +22,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
 
+.hidden.player-control {
+   opacity: 0;
+}
+
+.hidden.player-control {
+   opacity: 0;
 }
 
 .current-track-details {

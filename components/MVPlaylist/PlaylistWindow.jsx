@@ -18,10 +18,13 @@ const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
 import styles from '../../styles/css/PlaylistWindow.module.css';
 
+const SHOWN = 'shown';
+const HIDDEN = 'hidden';
+
 export default function PlaylistWindow({
   screenSize,
   setViewExpanded,
-//  setViewCollapsed
+  setViewCollapsed
 }) {
   const router = useRouter();
   const { playlistId } = router.query;
@@ -34,6 +37,7 @@ export default function PlaylistWindow({
   const playlistItems = useSelector(state => state.playlistItems);
   const videos = useSelector(state => state.videos);
   const addVideoStatus = useSelector(state => state.addVideoStatus);
+  const youtubeResults = useSelector(state => state.youtubeResults);
 
   const [ deviceId, setDeviceId ] = useState();
   const [ player, setPlayer ] = useState(undefined);
@@ -43,6 +47,7 @@ export default function PlaylistWindow({
   const [ contextUris, setContextUris ] = useState([]);
   const [ currentContextIdx, setCurrentContextIdx ] = useState(0);
   const [ paused, setPaused ] = useState(false);
+  const [ playerControlView, setPlayerControlView ] = useState(HIDDEN);
 
   useEffect(() => {
     window.onSpotifyWebPlaybackSDKReady = () => {
@@ -151,12 +156,18 @@ export default function PlaylistWindow({
 
   const onClickPlaylistItem = async (idx) => {
     const idxId = contextUris[idx].split('spotify:track:')[1];
+    setPlayerControlView(SHOWN);
+    dispatch({ type: PLAY_VIDEO_REFRESH });
+
+    if (youtubeResults.refresh) {
+      setViewCollapsed();
+    };
 
     if (currentTrackId !== idxId) {
       setCurrentContextIdx(idx);
       setContext(idx);
       setCurrentTrackId(idxId);
-    }
+    };
   };
 
   const togglePlayCurrentSong = (songId) => {
@@ -169,7 +180,6 @@ export default function PlaylistWindow({
     const songName = song.track.name;
     const artist = song.track.artists[0].name;
     const queryString = `${songName} ${artist}`;
-    console.log(`queryString: ${queryString}`);
 
     const songId = song.track.id;
 
@@ -232,7 +242,6 @@ export default function PlaylistWindow({
   const checkForVideo = (songId) => {
     let matchingVideoId;
 
-    console.log(`videos type: ${typeof videos}`);
     videos && videos.forEach(video => {
       if (video.songId === songId) {
         matchingVideoId = video.videoId;
@@ -266,7 +275,8 @@ export default function PlaylistWindow({
 
   const playVideo = (videoId) => {
     setViewExpanded();
-    console.log(`videoId: ${videoId}`);
+    setPlayerControlView(HIDDEN);
+    player && player.togglePlay();
 
     dispatch({
       type: PLAY_VIDEO,
@@ -284,24 +294,30 @@ export default function PlaylistWindow({
       ${styles[screenSize]}
       `}>
 
-      <div className={styles['player-control']}>
+      <div className={`
+        ${styles[playerControlView]}
+        ${styles['player-control']}
+        `}>
         <div className={styles['current-track-details']}>
+
           {track &&
-          <div className={styles['current-track-cover-art']}>
-          <Image
-            src={track.album.images[0].url}
-            height={50}
-            width={50}
-            alt='album conver'
-            />
-          </div>
+            <div className={styles['current-track-cover-art']}>
+            <Image
+              src={track.album.images[0].url}
+              height={50}
+              width={50}
+              alt='album conver'
+              />
+            </div>
           }
+
           {track &&
-          <div>
-            <div>{track.name}</div>
-            <div>{track.artists[0].name}</div>
-          </div>
+            <div>
+              <div>{track.name}</div>
+              <div>{track.artists[0].name}</div>
+            </div>
           }
+
         </div>
 
         <div className={styles['player-control-btns']}>

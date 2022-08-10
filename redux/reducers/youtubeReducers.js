@@ -17,7 +17,7 @@ import {
 } from '../types/youtubeTypes';
 
 
-export const getYoutubeResultsReducer = (state={}, action) => {
+export const getYoutubeResultsReducer = (state={ refresh: true }, action) => {
   switch (action.type) {
 
     case GET_YOUTUBE_RESULTS_LOADING:
@@ -94,7 +94,7 @@ export const getVideosReducer = (state=[], action) => {
   };
 };
 
-export const playVideoReducer = (state={}, action) => {
+export const playVideoReducer = (state={ refresh: true }, action) => {
   switch (action.type) {
 
     case PLAY_VIDEO:
