@@ -38,12 +38,12 @@ export default function MVPlaylist() {
      switch (videoShownHidden) {
       case HIDDEN: setVideoShownHidden(SHOWN); break;
       case SHOWN: setVideoShownHidden(HIDDEN); break;
-     }
+     };
 
      switch (playlistScreenSize) {
       case FULL: setPlaylistScreenSize(HALF); break;
       case HALF: setPlaylistScreenSize(FULL); break;
-     }
+     };
   };
 
   return (

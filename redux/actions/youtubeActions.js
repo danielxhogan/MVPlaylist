@@ -15,7 +15,6 @@ import {
 } from '../types/youtubeTypes';
 
 const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3/search';
-// const KEY = process.env.YOUTUBE_API_KEY;
 const KEY = 'AIzaSyCAw2xACgUNyRdIH2KMgOnktj5o9Sfc6Os';
 
 export const getYoutubeResultsAction = (
@@ -36,8 +35,6 @@ export const getYoutubeResultsAction = (
     const response = await axios.get(url);
 
     if (response.status === 200) {
-      console.log(`response.status: ${response.status}`);
-
       dispatch({
         type: GET_YOUTUBE_RESULTS_200,
         payload: {
@@ -75,11 +72,8 @@ export const addVideoAction = (
   songId,
   videoId
 ) => async (dispatch) => {
-  try {
-    console.log(`songId: ${songId}`);
-    console.log(`videoId: ${videoId}`);
-    console.log(`playlistId: ${playlistId}`);
 
+  try {
     const body = {
       userId,
       playlistId,
@@ -94,7 +88,6 @@ export const addVideoAction = (
     };
 
     const res = await axios.post('/api/yt/addvideo', body, apiConfig);
-    console.log(`addVideoAction res: ${res}`);
 
     if (res.status === 200) {
       dispatch({ type: ADD_VIDEO_200 });
@@ -115,7 +108,6 @@ export const getVideosServerSideAction = (
     const { origin } = absoluteUrl(req);
     const params = `userId=${userId}&playlistId=${playlistId}`;
     const url = `${origin}/api/yt/getvideos?${params}`;
-//    const url = `/api/yt/getvideos?${params}`;
     const res = await axios.get(url);
 
     if (res.status === 200) {
@@ -146,7 +138,6 @@ export const getVideosClientSideAction = (
 ) => async (dispatch) => {
   try {
     const params = `userId=${userId}&playlistId=${playlistId}`;
-//    const url = `${origin}/api/yt/getvideos?${params}`;
     const url = `/api/yt/getvideos?${params}`;
     const res = await axios.get(url);
 
