@@ -48,7 +48,7 @@ export default function SideNav() {
             ${styles['side-nav-item']}
             ${styles[shownHidden]}
           `}
-          onClick={onClickPlaylistItem}
+          // onClick={onClickPlaylistItem}
           >
           { playlist.name }
         </div>
