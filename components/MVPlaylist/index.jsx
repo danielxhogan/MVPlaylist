@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 
 import { useSelector } from 'react-redux';
+import { DARK, LIGHT } from '../../redux/types/themeTypes';
 
 import PlaylistWindow from './PlaylistWindow';
 import VideoWindow from './VideoWindow';
