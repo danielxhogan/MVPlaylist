@@ -4,16 +4,7 @@ import {
   DARK
 } from '../types/themeTypes';
 
-let theme;
-
-if (localStorage) {
-   theme = localStorage.getItem('theme');
-} else {
-   theme = DARK;
-}
-
-
-export const updateTheme = (state=theme, action) => {
+export const updateTheme = (state=DARK, action) => {
 
   switch (action.type) {
 

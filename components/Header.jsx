@@ -40,10 +40,10 @@ export default function Header({ home=false }) {
       localStorage.setItem('theme', DARK);
 
     } else if (localStorageTheme === LIGHT) {
-        setTheme(LIGHT);
-        dispatch(updateThemeLight());
-        setSunClass(HIDDEN);
-        setMoonClass(SHOWN);
+      setTheme(LIGHT);
+      dispatch(updateThemeLight());
+      setSunClass(HIDDEN);
+      setMoonClass(SHOWN);
     }
   }
 
