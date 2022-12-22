@@ -1,6 +1,8 @@
 import Header from '../components/Header';
 import Home from '../components/Home';
 
+import { wrapper } from '../redux/store';
+
 export default function HomePage() {
   return (
     <div>
@@ -22,6 +24,4 @@ wrapper.getServerSideProps(store => async ({ req, res }) => {
       }
     };
   }
-
-  await store.dispatch(getAllPlaylistsAction(session.accessToken));
 });
