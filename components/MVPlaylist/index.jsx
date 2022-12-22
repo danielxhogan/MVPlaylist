@@ -34,7 +34,13 @@ export default function MVPlaylist() {
   const setViewCollapsed = () => {
     setVideoShownHidden(HIDDEN);
     setPlaylistScreenSize(FULL);
-  }  
+  }
+  
+  useEffect(() => {
+    if (videoRefresh && resultsRefresh) {
+      setViewCollapsed();
+    }
+  }, [videoRefresh, resultsRefresh])
 
   const onClickToggleView = () => {
      switch (videoShownHidden) {
