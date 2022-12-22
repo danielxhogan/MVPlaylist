@@ -18,7 +18,7 @@ const HIDDEN = 'hidden';
 export default function Header({ home=false }) {
   const dispatch = useDispatch();
   // const theme = useSelector(state => state.theme);
-  
+
   const [ sunClass, setSunClass ] = useState(SHOWN);
   const [ moonClass, setMoonClass ] = useState(HIDDEN);
   const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
