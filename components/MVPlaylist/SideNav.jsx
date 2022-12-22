@@ -2,10 +2,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllPlaylistsAction } from '../../redux/actions/playlistActions';
-import {
-  updateThemeLight,
-  updateThemeDark
-} from '../../redux/actions/themeActions';
+// import {
+//   updateThemeLight,
+//   updateThemeDark
+// } from '../../redux/actions/themeActions';
 
 import styles from '../../styles/css/SideNav.module.css';
 
