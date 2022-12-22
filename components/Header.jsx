@@ -49,6 +49,7 @@ export default function Header({ home=false }) {
 
   const onClickSunIcon = () => {
     localStorage.setItem('theme', LIGHT);
+    setTheme(LIGHT);
     dispatch(updateThemeLight());
     setSunClass(HIDDEN);
     setMoonClass(SHOWN);
@@ -56,6 +57,7 @@ export default function Header({ home=false }) {
 
   const onClickMoonIcon = () => {
     localStorage.setItem('theme', DARK);
+    setTheme(DARK);
     dispatch(updateThemeDark());
     setMoonClass(HIDDEN);
     setSunClass(SHOWN);
