@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 
 import { useSelector } from 'react-redux';
-import { DARK, LIGHT } from '../../redux/types/themeTypes';
 
 import PlaylistWindow from './PlaylistWindow';
 import VideoWindow from './VideoWindow';
@@ -18,30 +17,7 @@ export default function MVPlaylist() {
   const [ videoShownHidden, setVideoShownHidden ] = useState(HIDDEN);
   const [ playlistScreenSize, setPlaylistScreenSize ] = useState(FULL);
 
-  const [ theme, setTheme ] = useState(DARK);
-  const [ mounted, setMounted ] = useState(false);
-  // const [ firstRender, setFirstRender ] = useState(true);
-
-  useEffect(() => {
-    setMounted(true);
-  }, [mounted])
-
-  // if (mounted && firstRender) {
-  if (mounted) {
-    // setFirstRender(false);
-    const localStorageTheme = localStorage.getItem('theme');
-    console.log(`mvplaylist the theme stored in local storage is ${localStorageTheme}`);
-
-    if (!localStorageTheme) {
-      console.log(`no theme stored in local storage`);
-      localStorage.setItem('theme', DARK);
-
-    } else if (localStorageTheme === LIGHT) {
-      setTheme(LIGHT);
-    }
-  }
-  
-  // const theme = useSelector(state => state.theme);
+  const theme = useSelector(state => state.theme);
   const playlistItems = useSelector(state => state.playlistItems);
 
   if (playlistItems.error && playlistItems.error.status === 401) {

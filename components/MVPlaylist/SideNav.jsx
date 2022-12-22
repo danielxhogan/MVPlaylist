@@ -2,6 +2,10 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllPlaylistsAction } from '../../redux/actions/playlistActions';
+import {
+  updateThemeLight,
+  updateThemeDark
+} from '../redux/actions/themeActions';
 
 import styles from '../../styles/css/SideNav.module.css';
 
@@ -23,6 +27,18 @@ export default function SideNav() {
     }
   };
 
+  const onClickPlaylistItem = () => {
+    setShownHidden(HIDDEN)
+    const localStorageTheme = localStorage.getItem('theme');
+
+    if (localStorageTheme === DARK) {
+      dispatch(updateThemeDark());
+
+    } else if (localStorageTheme === LIGHT) {
+      dispatch(updateThemeLight());
+    }
+  }
+
   const renderPlaylists = (playlists) => {
     return (playlists.map(playlist => {
       return (
@@ -32,7 +48,7 @@ export default function SideNav() {
             ${styles['side-nav-item']}
             ${styles[shownHidden]}
           `}
-          onClick={() => setShownHidden(HIDDEN)}
+          onClick={onClickPlaylistItem}
           >
           { playlist.name }
         </div>
