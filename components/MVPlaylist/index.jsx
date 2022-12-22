@@ -22,10 +22,6 @@ export default function MVPlaylist() {
   const { refresh: videoRefresh } = useSelector(state => state.video);
   const { refresh: resultsRefresh } = useSelector(state => state.youtubeResults);
 
-  if ( videoRefresh && resultsRefresh ) {
-    setViewCollapsed();
-  }
-
   if (playlistItems.error && playlistItems.error.status === 401) {
     signIn('spotify');
   }
@@ -39,6 +35,10 @@ export default function MVPlaylist() {
     setVideoShownHidden(HIDDEN);
     setPlaylistScreenSize(FULL);
   }  
+
+  if ( videoRefresh && resultsRefresh ) {
+    setViewCollapsed();
+  }
 
   const onClickToggleView = () => {
      switch (videoShownHidden) {
