@@ -17,11 +17,12 @@ const HIDDEN = 'hidden';
 
 export default function Header({ home=false }) {
   const dispatch = useDispatch();
-  const theme = useSelector(state => state.theme);
+  // const theme = useSelector(state => state.theme);
   
   const [ sunClass, setSunClass ] = useState(SHOWN);
   const [ moonClass, setMoonClass ] = useState(HIDDEN);
   const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
+  const [ theme, setTheme ] = useState(DARK);
   const [ mounted, setMounted ] = useState(false);
   const [ firstRender, setFirstRender ] = useState(true);
 
@@ -39,6 +40,7 @@ export default function Header({ home=false }) {
       localStorage.setItem('theme', DARK);
 
     } else if (localStorageTheme === LIGHT) {
+        setTheme(LIGHT);
         dispatch(updateThemeLight());
         setSunClass(HIDDEN);
         setMoonClass(SHOWN);
