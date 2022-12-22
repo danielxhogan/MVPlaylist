@@ -32,6 +32,7 @@ export default function Header({ home=false }) {
   if (mounted && firstRender) {
     setFirstRender(false);
     const localStorageTheme = localStorage.getItem('theme');
+    console.log(`the theme stored in local storage is ${localStorageTheme}`);
 
     if (!localStorageTheme) {
       console.log(`no theme stored in local storage`);
