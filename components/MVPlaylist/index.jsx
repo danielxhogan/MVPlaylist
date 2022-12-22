@@ -19,6 +19,8 @@ export default function MVPlaylist() {
 
   const theme = useSelector(state => state.theme);
   const playlistItems = useSelector(state => state.playlistItems);
+  const { refresh: videoRefresh } = useSelector(state => state.video);
+  const { refresh: resultsRefresh } = useSelector(state => state.youtubeResults);
 
   if (playlistItems.error && playlistItems.error.status === 401) {
     signIn('spotify');
