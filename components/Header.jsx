@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import styles from '../styles/css/Header.module.css';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { DARK, LIGHT } from '../redux/types/themeTypes';
 import {
   updateThemeLight,
   updateThemeDark
 } from '../redux/actions/themeActions';
+import { DARK, LIGHT } from '../redux/types/themeTypes';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { useEffect, useState } from 'react';
+
+import { useSession, signIn, signOut } from 'next-auth/react';
+import Link from 'next/link';
 import Image from 'next/image';
-import styles from '../styles/css/Header.module.css';
 
 const SHOWN = 'shown';
 const HIDDEN = 'hidden';
@@ -25,34 +26,34 @@ export default function Header({ home=false }) {
   const [ mounted, setMounted ] = useState(false);
   const [ firstRender, setFirstRender ] = useState(true);
 
-  useEffect(() => {
-    setMounted(true);
-  }, [mounted])
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, [mounted])
 
-  if (mounted && firstRender) {
-    setFirstRender(false);
+  // if (mounted && firstRender) {
+  //   setFirstRender(false);
+  //   const localStorageTheme = localStorage.getItem('theme');
+
+  //   if (!localStorageTheme) {
+  //     localStorage.setItem('theme', DARK);
+
+  //   } else if (localStorageTheme === LIGHT) {
+  //     dispatch(updateThemeLight());
+  //     setSunClass(HIDDEN);
+  //     setMoonClass(SHOWN);
+  //   }
+  // }
+
+  useEffect(() => {
     const localStorageTheme = localStorage.getItem('theme');
 
-    if (!localStorageTheme) {
-      localStorage.setItem('theme', DARK);
-
-    } else if (localStorageTheme === LIGHT) {
-      // setTheme(LIGHT);
-      dispatch(updateThemeLight());
-      setSunClass(HIDDEN);
-      setMoonClass(SHOWN);
-    }
-  }
-
-  useEffect(() => {
-    const localStorageTheme = localStorage.getItem('theme');
-    if (localStorageTheme === DARK) { dispatch(updateThemeDark()) }
-    else (dispatch(updateThemeLight()))
+    if (!localStorageTheme) { localStorage.setItem('theme', DARK); }
+    if (localStorageTheme === DARK) { dispatch(updateThemeDark()); }
+    else { (dispatch(updateThemeLight())); }
   }, [dispatch, theme])
 
   const onClickSunIcon = () => {
     localStorage.setItem('theme', LIGHT);
-    // setTheme(LIGHT);
     dispatch(updateThemeLight());
     setSunClass(HIDDEN);
     setMoonClass(SHOWN);
@@ -60,7 +61,6 @@ export default function Header({ home=false }) {
 
   const onClickMoonIcon = () => {
     localStorage.setItem('theme', DARK);
-    // setTheme(DARK);
     dispatch(updateThemeDark());
     setMoonClass(HIDDEN);
     setSunClass(SHOWN);
