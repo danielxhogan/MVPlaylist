@@ -1,8 +1,8 @@
 import Header from '../components/Header';
 import Playlists from '../components/Playlists';
 
-import { authOptions } from './api/auth/[...nextauth]';
 import { unstable_getServerSession } from 'next-auth/next';
+import { authOptions } from './api/auth/[...nextauth]';
 
 import { wrapper } from '../redux/store';
 import { getAllPlaylistsAction } from '../redux/actions/playlistActions';

@@ -1,6 +1,8 @@
 import Header from '../components/Header';
 import Home from '../components/Home';
 
+import { unstable_getServerSession } from 'next-auth/next';
+import { authOptions } from './api/auth/[...nextauth]';
 import { wrapper } from '../redux/store';
 
 export default function HomePage() {
