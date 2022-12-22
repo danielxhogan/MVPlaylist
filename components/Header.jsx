@@ -22,7 +22,6 @@ export default function Header({ home=false }) {
   const [ sunClass, setSunClass ] = useState(SHOWN);
   const [ moonClass, setMoonClass ] = useState(HIDDEN);
   const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
-  // const [ theme, setTheme ] = useState(DARK);
   const [ mounted, setMounted ] = useState(false);
   const [ firstRender, setFirstRender ] = useState(true);
 
@@ -33,7 +32,6 @@ export default function Header({ home=false }) {
   if (mounted && firstRender) {
     setFirstRender(false);
     const localStorageTheme = localStorage.getItem('theme');
-    console.log('suh');
 
     if (!localStorageTheme) {
       localStorage.setItem('theme', DARK);
