@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import styles from '../styles/css/Home.module.css';
 
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 
 export default function Home() {
   const theme = useSelector(state => state.theme);
