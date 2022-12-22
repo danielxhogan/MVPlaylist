@@ -27,17 +27,17 @@ export default function SideNav() {
     }
   };
 
-  const onClickPlaylistItem = () => {
-    setShownHidden(HIDDEN)
-    const localStorageTheme = localStorage.getItem('theme');
+  // const onClickPlaylistItem = () => {
+  //   setShownHidden(HIDDEN)
+  //   const localStorageTheme = localStorage.getItem('theme');
 
-    if (localStorageTheme === DARK) {
-      dispatch(updateThemeDark());
+  //   if (localStorageTheme === DARK) {
+  //     dispatch(updateThemeDark());
 
-    } else if (localStorageTheme === LIGHT) {
-      dispatch(updateThemeLight());
-    }
-  }
+  //   } else if (localStorageTheme === LIGHT) {
+  //     dispatch(updateThemeLight());
+  //   }
+  // }
 
   const renderPlaylists = (playlists) => {
     return (playlists.map(playlist => {
