@@ -33,6 +33,7 @@ export default function Header({ home=false }) {
   if (mounted && firstRender) {
     setFirstRender(false);
     const localStorageTheme = localStorage.getItem('theme');
+    console.log('suh');
 
     if (!localStorageTheme) {
       localStorage.setItem('theme', DARK);
