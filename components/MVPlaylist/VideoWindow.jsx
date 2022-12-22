@@ -27,7 +27,7 @@ export default function VideoWindow({
   } = useSelector(state => state.youtubeResults);
 
   console.log(`data: ${youtubeResults}`);
-  console.log(`data: ${refresh}`);
+  console.log(`refresh: ${refresh}`);
 
   const onSubmitAddVideo = (e) => {
     e.preventDefault();

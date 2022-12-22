@@ -131,7 +131,7 @@ export default function PlaylistWindow({
         'Authorization': `Bearer ${accessToken}`
       }
     };
-    // await axios.put(url, body, config);
+
     try { await axios.put(url, body, config); }
     catch (err) { window.location.reload(); }
   }

@@ -34,6 +34,7 @@ export default function Header({ home=false }) {
     const localStorageTheme = localStorage.getItem('theme');
 
     if (!localStorageTheme) {
+      console.log(`no theme stored in local storage`);
       localStorage.setItem('theme', DARK);
 
     } else if (localStorageTheme === LIGHT) {

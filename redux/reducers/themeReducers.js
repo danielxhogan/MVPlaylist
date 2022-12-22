@@ -5,7 +5,7 @@ import {
 } from '../types/themeTypes';
 
 
-export const updateTheme = (state=DARK, action) => {
+export const updateTheme = (state='', action) => {
 
   switch (action.type) {
 
