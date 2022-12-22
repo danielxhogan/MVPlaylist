@@ -23,26 +23,14 @@ export default function Header({ home=false }) {
   const [ sunClass, setSunClass ] = useState(SHOWN);
   const [ moonClass, setMoonClass ] = useState(HIDDEN);
   const [ smScrSearchClass, setSmScrSearchClass ] = useState(HIDDEN);
-  const [ mounted, setMounted ] = useState(false);
-  const [ firstRender, setFirstRender ] = useState(true);
 
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, [mounted])
-
-  // if (mounted && firstRender) {
-  //   setFirstRender(false);
-  //   const localStorageTheme = localStorage.getItem('theme');
-
-  //   if (!localStorageTheme) {
-  //     localStorage.setItem('theme', DARK);
-
-  //   } else if (localStorageTheme === LIGHT) {
-  //     dispatch(updateThemeLight());
-  //     setSunClass(HIDDEN);
-  //     setMoonClass(SHOWN);
-  //   }
-  // }
+  // When page first loads, set theme in browser if not already set.
+  // If already set to light theme, update sun/moon icon.
+  // Anytime theme value in redux store changes, check to make sure
+  // redux theme matches localStorage theme. When switching between playlists,
+  // redux refreshes any values not being set on page build, resets theme to
+  // default DARK. This useEffect will run anytime theme changes and make
+  // sure it matches localStorage.
 
   useEffect(() => {
     const localStorageTheme = localStorage.getItem('theme');
@@ -79,16 +67,6 @@ export default function Header({ home=false }) {
   };
   
   const { data: session, status } = useSession();
-
-  // if (status === 'loading') {
-  //   console.log('loading');
-
-  // } else if (status === 'authenticated') {
-  //   console.log(session);
-
-  // } else {
-  //   console.log('not logged in');
-  // }
 
   return (
     <div className={styles[theme]}>
