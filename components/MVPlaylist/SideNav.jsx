@@ -5,7 +5,7 @@ import { getAllPlaylistsAction } from '../../redux/actions/playlistActions';
 import {
   updateThemeLight,
   updateThemeDark
-} from '../redux/actions/themeActions';
+} from '../../redux/actions/themeActions';
 
 import styles from '../../styles/css/SideNav.module.css';
 
