@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signIn } from 'next-auth/react';
 
 import { useSelector } from 'react-redux';
@@ -33,6 +33,10 @@ export default function MVPlaylist() {
     setVideoShownHidden(HIDDEN);
     setPlaylistScreenSize(FULL);
   }  
+
+  useEffect(() => {
+    setViewCollapsed();
+  })
 
   const onClickToggleView = () => {
      switch (videoShownHidden) {
