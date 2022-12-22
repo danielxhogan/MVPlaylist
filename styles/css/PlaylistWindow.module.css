@@ -81,6 +81,26 @@
     width: 400px;
   }
 }
+@media only screen and (max-width: 450px) {
+  .window {
+    width: 350px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .window {
+    width: 300px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .window {
+    width: 250px;
+  }
+}
+@media only screen and (max-width: 300px) {
+  .window {
+    width: 200px;
+  }
+}
 .dark .playlist-window {
   height: 100%;
   padding-bottom: 75px;
