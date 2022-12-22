@@ -1,10 +1,10 @@
+import styles from '../styles/css/Playlists.module.css';
+
+import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { signIn, useSession } from 'next-auth/react';
 import Link from 'next/link';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
-
-import styles from '../styles/css/Playlists.module.css';
 
 export default function Playlists() {
   const { data: session } = useSession();
@@ -66,7 +66,6 @@ export default function Playlists() {
             </div>
             </>
           )}
-
           
         </div>
       </div>
