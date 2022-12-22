@@ -49,7 +49,11 @@ export default function Header({ home=false }) {
 
     if (!localStorageTheme) { localStorage.setItem('theme', DARK); }
     if (localStorageTheme === DARK) { dispatch(updateThemeDark()); }
-    else { (dispatch(updateThemeLight())); }
+    else {
+      (dispatch(updateThemeLight()));
+      setSunClass(HIDDEN);
+      setMoonClass(SHOWN);
+    }
   }, [dispatch, theme])
 
   const onClickSunIcon = () => {
