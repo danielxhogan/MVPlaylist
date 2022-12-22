@@ -1,10 +1,5 @@
-import { useEffect, useState } from 'react';
+import styles from '../../styles/css/PlaylistWindow.module.css';
 
-import { useRouter } from 'next/router';
-import Script from 'next/script';
-import Image from 'next/image';
-
-import { useDispatch, useSelector } from 'react-redux';
 import { getYoutubeResultsAction } from '../../redux/actions/youtubeActions';
 import { getVideosClientSideAction } from '../../redux/actions/youtubeActions';
 import {
@@ -12,11 +7,16 @@ import {
   ADD_VIDEO_REFRESH,
   PLAY_VIDEO_REFRESH
 } from '../../redux/types/youtubeTypes';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
-import styles from '../../styles/css/PlaylistWindow.module.css';
+import { useRouter } from 'next/router';
+import Script from 'next/script';
+import Image from 'next/image';
+
+const SPOTIFY_BASE_URL = 'https://api.spotify.com/v1';
 
 const SHOWN = 'shown';
 const HIDDEN = 'hidden';
@@ -30,7 +30,6 @@ export default function PlaylistWindow({
   const { playlistId } = router.query;
 
   const dispatch = useDispatch();
-
   const theme = useSelector(state => state.theme);
   const accessToken = useSelector(state => state.accessToken);
   const userId = useSelector(state => state.userId);

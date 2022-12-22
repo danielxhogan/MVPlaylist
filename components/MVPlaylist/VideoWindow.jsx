@@ -1,11 +1,11 @@
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-
-import { useDispatch, useSelector } from 'react-redux';
-import { addVideoAction } from '../../redux/actions/youtubeActions';
-import { ADD_VIDEO_REFRESH, GET_YOUTUBE_RESULTS_REFRESH } from '../../redux/types/youtubeTypes';
-
 import styles from '../../styles/css/VideoWindow.module.css';
+
+import { addVideoAction } from '../../redux/actions/youtubeActions';
+import { GET_YOUTUBE_RESULTS_REFRESH } from '../../redux/types/youtubeTypes';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function VideoWindow({
   shownHidden,
@@ -16,14 +16,12 @@ export default function VideoWindow({
 
   const dispatch = useDispatch();
   const theme = useSelector(state => state.theme);
-  const accessToken = useSelector(state => state.accessToken);
   const userId = useSelector(state => state.userId);
   const video = useSelector(state => state.video);
   const {
     data: youtubeResults,
     query,
-    songId,
-    refresh
+    songId
   } = useSelector(state => state.youtubeResults);
 
   const onSubmitAddVideo = (e) => {

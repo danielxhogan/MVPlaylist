@@ -1,9 +1,10 @@
+import styles from '../../styles/css/SideNav.module.css';
+
+import { getAllPlaylistsAction } from '../../redux/actions/playlistActions';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { useState } from 'react';
 import Link from 'next/link';
-import { useSelector, useDispatch } from 'react-redux';
-import { getAllPlaylistsAction } from '../../redux/actions/playlistActions';
-
-import styles from '../../styles/css/SideNav.module.css';
 
 const SHOWN = 'shown';
 const HIDDEN = 'hidden';
