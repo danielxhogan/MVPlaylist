@@ -24,7 +24,7 @@ export default function MVPlaylist() {
 
   useEffect(() => {
     setMounted(true);
-  }, [])
+  }, [mounted])
 
   // if (mounted && firstRender) {
   if (mounted) {
