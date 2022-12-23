@@ -36,7 +36,7 @@ export default function Header({ home=false }) {
     const localStorageTheme = localStorage.getItem('theme');
 
     if (!localStorageTheme) { localStorage.setItem('theme', DARK); }
-    if (localStorageTheme === DARK) { dispatch(updateThemeDark()); }
+    else if (localStorageTheme === DARK) { dispatch(updateThemeDark()); }
     else {
       (dispatch(updateThemeLight()));
       setSunClass(HIDDEN);
