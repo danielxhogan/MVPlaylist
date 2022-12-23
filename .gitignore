@@ -40,3 +40,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+*.mkv
+*.blend
+BL_proxy
