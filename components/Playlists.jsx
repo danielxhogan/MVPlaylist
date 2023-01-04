@@ -3,8 +3,9 @@ import styles from '../styles/css/Playlists.module.css';
 import { getAllPlaylistsAction } from '../redux/actions/playlistActions';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { signIn, useSession } from 'next-auth/react';
+import Head from 'next/head'
 import Link from 'next/link';
+import { signIn, useSession } from 'next-auth/react';
 
 export default function Playlists() {
   const { data: session } = useSession();
@@ -53,6 +54,9 @@ export default function Playlists() {
     <div className={styles[theme]}>
       <div className={styles['playlists']}>
         <div className={`${styles['content']} ${styles['container']}`}>
+          <Head>
+            <title>mvplaylist</title>
+          </Head>
 
           { playlists.loading ? (
             <p>loading</p>

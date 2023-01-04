@@ -1,6 +1,7 @@
 import styles from '../styles/css/Home.module.css';
 
 import { useSelector } from 'react-redux';
+import Head from 'next/head'
 import Image from 'next/image';
 
 export default function Home() {
@@ -10,6 +11,9 @@ export default function Home() {
     <div className={styles[theme]}>
     <div className={`${styles['body']}`}>
     <div className={`${styles['container']}`}>
+      <Head>
+        <title>mvplaylist</title>
+      </Head>
       <div className={styles['logos']}>
         <div>
         <Image

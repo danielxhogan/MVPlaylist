@@ -5,6 +5,7 @@ import styles from '../../styles/css/MVPlaylist.module.css';
 import { useSelector } from 'react-redux';
 
 import { useState, useEffect } from 'react';
+import Head from 'next/head'
 
 import { signIn } from 'next-auth/react';
 
@@ -59,6 +60,9 @@ export default function MVPlaylist() {
 
   return (
     <div className={styles[theme]}>
+      <Head>
+        <title>mvplaylist</title>
+      </Head>
     {/*
     <button
       className={styles['toggle-view-btn']}
